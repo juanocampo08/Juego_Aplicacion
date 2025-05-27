@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="se definen atributos de la clase agente.">
+    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="se define el metodo de recibir daño de la clase agente">
       <change beforePath="$PROJECT_DIR$/src/model/agentes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/agentes.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,13 +94,22 @@
       <option name="project" value="LOCAL" />
       <updated>1748388371961</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="se define el metodo de recibir daño de la clase agente">
+      <option name="closed" value="true" />
+      <created>1748388832612</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1748388832612</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Creacion de carpetas necesarias para iniciar la implementacion del codigo respectivo." />
     <MESSAGE value="Ajustes de archivos restantes." />
     <MESSAGE value="se definen atributos de la clase agente." />
-    <option name="LAST_COMMIT_MESSAGE" value="se definen atributos de la clase agente." />
+    <MESSAGE value="se define el metodo de recibir daño de la clase agente" />
+    <option name="LAST_COMMIT_MESSAGE" value="se define el metodo de recibir daño de la clase agente" />
   </component>
 </project>

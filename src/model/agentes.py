@@ -46,6 +46,13 @@ class Agente:
             return True
         return False
 
+    def update_effects(self):
+        self.pulse_phase += 0.1
+        self.shield_rotation += 2
+
+        self.trail_positions.pop()
+        self.trail_positions.insert(0, (self.x, self.y))
+
 
 
 
