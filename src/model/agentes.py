@@ -31,3 +31,22 @@ class Agente:
         self.glow_color = self._calculate_glow_color()
         self.core_color = self._calculate_core_color()
 
+    def recibir_dano(self, cantidad = 20):
+        if not self.esta_vivo:
+            return False
+        if pygame.time.get_ticks() - self.tiempo_dano < 500:
+            return None
+
+        self.vida_actual -= cantidad
+        self.tiempo_dano = pygame.time.get_ticks()
+
+        if self.vida_actual <= 0:
+            self.vida_actual = 0
+            self.esta_vivo = False
+            return True
+        return False
+
+
+
+
+
