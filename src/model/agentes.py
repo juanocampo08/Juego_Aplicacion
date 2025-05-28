@@ -250,6 +250,12 @@ class Jugador(Agente):
             self.proyectiles.append(proyectil)
             self.tiempo_ultimo_disparo = tiempo_actual
 
+    def actualizar_proyectiles(self, ancho_pantalla, alto_pantalla, obstaculos = []):
+        for proyectil in self.proyectiles[:]:
+            proyectil.update(ancho_pantalla, alto_pantalla, obstaculos)
+            if not proyectil.activo:
+                self.proyectiles.remove(proyectil) .
+
     def dibujar_proyectiles(self, superficie):
         for proyectil in self.proyectiles:
             proyectil.dibujar(superficie)
