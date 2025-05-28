@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="muestra una pantalla de fin de juego con el puntaje final y un boton para salir del juego.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/envs/persecucion_env.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/envs/persecucion_env.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ia/smart_chase_algorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ia/smart_chase_algorithm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/agentes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/agentes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/entorno.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entorno.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/proyectil.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/proyectil.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uv.lock" beforeDir="false" afterPath="$PROJECT_DIR$/uv.lock" afterDir="false" />
-    </list>
+    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="verifica si el proyectil ha colisionado con un agente dado." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -350,61 +340,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748399905537</updated>
     </task>
-    <task id="LOCAL-00035" summary="inicia la generacion de un nuevo mapa aleatorio en un hilo separado.&#10;La funcion interna ejecuta la logica que genera el mapa y llama al callback, se ejecuta por hilo separado.">
-      <option name="closed" value="true" />
-      <created>1748446271551</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1748446271551</updated>
-    </task>
-    <task id="LOCAL-00036" summary="entrena un modelo DQN para el juego de persecucion con configuracion optomizada.">
-      <option name="closed" value="true" />
-      <created>1748446735502</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1748446735502</updated>
-    </task>
-    <task id="LOCAL-00037" summary="ejecuta el juego usando el modelo entrenado para controlar al enemigo.">
-      <option name="closed" value="true" />
-      <created>1748446956565</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1748446956565</updated>
-    </task>
-    <task id="LOCAL-00038" summary="Muestra una pantalla de bienvenida con un titulo y un boton interactivo para iniciar el juego.">
-      <option name="closed" value="true" />
-      <created>1748447364867</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1748447364867</updated>
-    </task>
-    <task id="LOCAL-00039" summary="muestra una pantalla de fin de juego con el puntaje final y un boton para salir del juego.">
-      <option name="closed" value="true" />
-      <created>1748447692369</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1748447692369</updated>
-    </task>
-    <option name="localTasksCounter" value="40" />
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="metodo que dibuja el agente como un circulo" />
+    <MESSAGE value="dibuja el jugador con un diseño futurista inlcuyendo su escudo y un nucleo hexagonal." />
+    <MESSAGE value="Dibuja al enemigo con un diseño amenazante, similar a un diamante con un nucleo rotatorio" />
+    <MESSAGE value="mover, mueve el agente y gestiona las colisiones con obstaculos y otros agentes. tambien actualiza los egectos visuales" />
+    <MESSAGE value="se define una nueva clase enemigo que hereda de agente." />
     <MESSAGE value="el metodo actualiza efectos visuales relacionados con la inteligencia artificial del enemigo." />
     <MESSAGE value="se define la clase jugador que hereda de la clase Agente" />
     <MESSAGE value="se define el metodo que crea proyectiles, los añade a la lista de proyectiles." />
@@ -425,11 +369,6 @@
     <MESSAGE value="actualiza la posicion del proyectil, sus efectos y verifica colisiones." />
     <MESSAGE value="Dibuja el proyectil en la superficie de pygame." />
     <MESSAGE value="verifica si el proyectil ha colisionado con un agente dado." />
-    <MESSAGE value="inicia la generacion de un nuevo mapa aleatorio en un hilo separado.&#10;La funcion interna ejecuta la logica que genera el mapa y llama al callback, se ejecuta por hilo separado." />
-    <MESSAGE value="entrena un modelo DQN para el juego de persecucion con configuracion optomizada." />
-    <MESSAGE value="ejecuta el juego usando el modelo entrenado para controlar al enemigo." />
-    <MESSAGE value="Muestra una pantalla de bienvenida con un titulo y un boton interactivo para iniciar el juego." />
-    <MESSAGE value="muestra una pantalla de fin de juego con el puntaje final y un boton para salir del juego." />
-    <option name="LAST_COMMIT_MESSAGE" value="muestra una pantalla de fin de juego con el puntaje final y un boton para salir del juego." />
+    <option name="LAST_COMMIT_MESSAGE" value="verifica si el proyectil ha colisionado con un agente dado." />
   </component>
 </project>
