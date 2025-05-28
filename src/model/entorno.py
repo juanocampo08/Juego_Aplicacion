@@ -35,14 +35,31 @@ class ObstaculoFuturista:
         else:
             self._draw_barrier_obstacle(superficie)
     def _draw_tech_obstacle(self, superficie):
-        pygame.draw.rect(superficie, (60, 80, 120), self.rect)  # Gris azulado.
+        pygame.draw.rect(superficie, (60, 80, 120), self.rect)
 
         VisualEffects.draw_tech_border(superficie, self.rect, (100, 150, 200), 2)
 
-        pulse_intensity = (math.sin(self.energy_pulse) + 1) / 2  # Intensidad varía con el pulso.
-        energy_color = (int(100 + pulse_intensity * 100), int(150 + pulse_intensity * 50), 200)  # Color pulsante.
+        pulse_intensity = (math.sin(self.energy_pulse) + 1) / 2
+        energy_color = (int(100 + pulse_intensity * 100), int(150 + pulse_intensity * 50), 200)
 
         for i in range(3):
             y_pos = self.rect.y + (i + 1) * self.rect.height // 4
             pygame.draw.line(superficie, energy_color,(self.rect.x + 5, y_pos),(self.rect.x + self.rect.width - 5, y_pos), 2)
 
+    def _draw_crystal_obstacle(self, superficie):
+        center = self.rect.center
+
+        crystal_points = []
+        for i in range(6):
+            angle = i * math.pi / 3
+            x = center[0] + (self.rect.width // 3) * math.cos(angle)
+            y = center[1] + (self.rect.height // 3) * math.sin(angle)
+            crystal_points.append((x, y))
+
+        pygame.draw.polygon(superficie, (80, 120, 180), crystal_points)
+        pygame.draw.polygon(superficie, (120, 160, 220), crystal_points, 3)
+
+        pulse_intensity = (math.sin(self.energy_pulse * 2) + 1) / 2
+        inner_color = (int(150 + pulse_intensity * 105), int(180 + pulse_intensity * 75), 255)
+        inner_size = int((self.rect.width // 6) * (0.5 + pulse_intensity * 0.5))
+        pygame.draw.circle(superficie, inner_color, center, inner_size)
