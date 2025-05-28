@@ -115,4 +115,3 @@ def jugar_con_modelo_mejorado(modelo_path, modo_ia="hibrido"):
 
     env_juego.close()
     print("¡Gracias por jugar!")
-
