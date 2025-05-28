@@ -75,3 +75,12 @@ class ObstaculoFuturista:
             pygame.draw.rect(barrier_surface, barrier_color, (0, 0, self.rect.width, 4))
             y_pos = self.rect.y + i * (self.rect.height // 5)
             superficie.blit(barrier_surface, (self.rect.x, y_pos))
+
+class PowerUpSalud:
+    def __init__(self, x, y, duracion=5):
+        self.x = x
+        self.y = y
+        self.radio = 10
+        self.tiempo_creacion = time.time()
+        self.duracion = duracion
+        self.activo = True
