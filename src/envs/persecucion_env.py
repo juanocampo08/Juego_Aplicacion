@@ -405,3 +405,151 @@ class PersecucionPygameEnv(gym.Env):
 
             return observation, recompensa, terminado, truncado, info
 
+    def _calcular_recompensa_mejorada(self, accion):
+        distancia_actual = min(
+            math.hypot(e.x - self.jugador.x, e.y - self.jugador.y) for e in self.enemigos if e.esta_vivo)
+        recompensa = 0
+
+        if distancia_actual < (
+                self.enemigos[0].radio + self.jugador.radio):  # Asume que todos los enemigos tienen el mismo radio
+            recompensa += 300
+
+        # Recompensa adaptativa por acercarse al jugador.
+        if hasattr(self, 'distancia_anterior') and self.distancia_anterior is not None:
+            diferencia_distancia = self.distancia_anterior - distancia_actual  # Recompensa por la reducción de distancia
+            # Un factor de distancia que aumenta la recompensa cuando la distancia es menor,
+            # lo que fomenta que el enemigo se acerque aún más una vez cerca.
+            factor_distancia = 1.0 + (200 - min(distancia_actual, 200)) / 200
+            recompensa += diferencia_distancia * factor_distancia * 3.0
+
+        # Penalización por tiempo, para fomentar la eficiencia en la captura.
+        recompensa -= 0.01
+
+        # Penalización por colisiones con obstáculos.
+        rect_enemigo = pygame.Rect(
+            int(self.enemigos[0].x - self.enemigos[0].radio),  # Asume que solo se considera el primer enemigo
+            int(self.enemigos[0].y - self.enemigos[0].radio),
+            self.enemigos[0].radio * 2, self.enemigos[0].radio * 2
+        )
+        colision = False
+        for obstaculo in self.obstaculos:
+            if rect_enemigo.colliderect(obstaculo.rect):
+                recompensa -= 5
+                colision = True
+                break
+        if not colision:
+            recompensa += 0.5  # Pequeña recompensa por evitar obstáculos
+
+        # Penalización extra por quedarse quieto.
+        if accion == 8:
+            recompensa -= 1.0
+
+        # Recompensa por eficiencia: mayor recompensa si el enemigo está muy cerca del jugador.
+        if distancia_actual < 50:
+            recompensa += (50 - distancia_actual) * 0.15
+
+        # Penalización por zigzagueo, para fomentar movimientos más suaves y directos.
+        if hasattr(self, 'accion_anterior'):
+            if accion != self.accion_anterior and accion != 8:  # Si la acción cambia y no es "quieto"
+                recompensa -= 0.2
+        self.accion_anterior = accion
+
+        self.distancia_anterior = distancia_actual
+        return recompensa
+
+    def _render_frame(self):
+
+        if self.pantalla is None:
+            pygame.init()
+            pygame.display.init()
+            self.pantalla = pygame.display.set_mode((self.ancho_pantalla, self.alto_pantalla))
+            pygame.display.set_caption("🚀 CYBER PURSUIT")
+
+            if not self.modo_entrenamiento:
+                pantalla_bienvenida(self.pantalla, self.ancho_pantalla, self.alto_pantalla)
+            self.font = pygame.font.Font(None, 28)
+            self.title_font = pygame.font.Font(None, 36)
+        if self.clock is None:
+            self.clock = pygame.time.Clock()
+
+        for y in range(self.alto_pantalla):
+            base_intensity = 10 + (y / self.alto_pantalla) * 20
+            blue_component = int(base_intensity + 10 * math.sin(y * 0.01))
+            purple_component = int(base_intensity * 0.7)
+            color = (int(base_intensity * 0.3), purple_component, blue_component)
+            pygame.draw.line(self.pantalla, color, (0, y), (self.ancho_pantalla, y))
+
+        grid_intensity = int(40 + 20 * (math.sin(pygame.time.get_ticks() * 0.001) + 1) / 2)
+        grid_color = (grid_intensity, grid_intensity, grid_intensity + 20)
+
+        for x in range(0, self.ancho_pantalla, 50):
+            pygame.draw.line(self.pantalla, grid_color, (x, 0), (x, self.alto_pantalla), 1)
+        for y in range(0, self.alto_pantalla, 50):
+            pygame.draw.line(self.pantalla, grid_color, (0, y), (self.ancho_pantalla, y), 1)
+
+        for obstaculo in self.obstaculos:
+            if hasattr(obstaculo, 'update'):
+                obstaculo.update()
+            obstaculo.dibujar(self.pantalla)
+
+        if len(self.enemigos) > 1:
+            for i, enemigo1 in enumerate(self.enemigos):
+                if not enemigo1.esta_vivo:
+                    continue
+                for enemigo2 in self.enemigos[i + 1:]:
+                    if not enemigo2.esta_vivo:
+                        continue
+                    dist = math.hypot(enemigo1.x - enemigo2.x, enemigo1.y - enemigo2.y)
+                    if dist < 150:
+                        alpha = int(50 * (1 - dist / 150))
+                        VisualEffects.draw_particle_trail(
+                            self.pantalla,
+                            (enemigo1.x, enemigo1.y),
+                            (enemigo2.x, enemigo2.y),
+                            (255, 100, 100),
+                            particles=6
+                        )
+
+        self.jugador.x = max(0, min(self.jugador.x, self.ancho_pantalla))
+        self.jugador.y = max(0, min(self.jugador.y, self.alto_pantalla))
+        self.jugador.dibujar(self.pantalla)
+
+        for enemigo in self.enemigos:
+            if not enemigo.esta_vivo:
+                continue
+            enemigo.x = max(0, min(enemigo.x, self.ancho_pantalla))
+            enemigo.y = max(0, min(enemigo.y, self.alto_pantalla))
+            enemigo.dibujar(self.pantalla)
+
+        if self.enemigos:
+            enemigos_ordenados = sorted(
+                self.enemigos,
+                key=lambda e: math.hypot(e.x - self.jugador.x, e.y - self.jugador.y)
+            )
+
+            closest_enemy = next((e for e in enemigos_ordenados if e.esta_vivo), None)
+
+            if closest_enemy:
+                vision_surface = pygame.Surface((160, 160), pygame.SRCALPHA)  # Superficie semitransparente
+                pygame.draw.circle(vision_surface, (255, 0, 0, 20), (80, 80), 80)  # Círculo interior
+                pygame.draw.circle(vision_surface, (255, 100, 100, 40), (80, 80), 80, 2)  # Borde del círculo
+                self.pantalla.blit(vision_surface,
+                                   (closest_enemy.x - 80, closest_enemy.y - 80))  # Dibujar en la posición del enemigo
+
+        if not self.modo_entrenamiento:
+            self._draw_futuristic_hud()
+
+        if not self.modo_entrenamiento:
+            self.jugador.dibujar_proyectiles(self.pantalla)
+
+        for powerup in self.powerups_salud:
+            powerup.dibujar(self.pantalla)
+
+        pygame.display.flip()
+        if not self.modo_entrenamiento and self.juego_terminado:
+            pantalla_game_over(self.pantalla, self.ancho_pantalla,
+                               self.alto_pantalla, self.victoria, self.puntos)
+
+        self.clock.tick(self.velocidad_juego if not self.modo_entrenamiento else 0)
+
+

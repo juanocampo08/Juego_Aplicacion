@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="dibuja una estela de particulas translucidas entre ddos puntos.&#10;crea un efecto de rastro o movimiento" />
+    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="Función de renderizado para mostrar el estado actual del juego. Incluye un fondo futurista, obstáculos dinámicos, agentes y un HUD(Heads-Up Display).">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/envs/persecucion_env.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/envs/persecucion_env.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,9 +32,12 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/juanocampo08/Juego_Aplicacion.git&quot;,
-    &quot;accountId&quot;: &quot;29a1b830-d935-4637-bcce-11927151e0b2&quot;
+    &quot;accountId&quot;: &quot;196e13be-ee3c-413a-9094-7e78dfd04af9&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -40,14 +46,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "Rebasing master",
+    "ignore.virus.scanning.warn.message": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\juanj\PycharmProjects\Juego_Aplicacion\src\ml_model" />
@@ -56,7 +63,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-4f4e415b4190-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.26053.29" />
+        <option value="bundled-python-sdk-a5bc9544c897-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.23654.177" />
       </set>
     </attachedChunks>
   </component>
@@ -341,47 +348,87 @@
       <option name="project" value="LOCAL" />
       <updated>1748399905537</updated>
     </task>
-    <task id="LOCAL-00035" summary="se crea la clase para dibujar varios efectos visuales futuristas.&#10;el metodo dibuja un circulo con un efecto de brillo suave a su alrededor.">
+    <task id="LOCAL-00035" summary="verifica si el proyectil ha colisionado con un agente dado.">
       <option name="closed" value="true" />
-      <created>1748451303762</created>
+      <created>1748403654555</created>
       <option name="number" value="00035" />
       <option name="presentableId" value="LOCAL-00035" />
       <option name="project" value="LOCAL" />
-      <updated>1748451303762</updated>
+      <updated>1748403654555</updated>
     </task>
-    <task id="LOCAL-00036" summary="dibuja un hexagono regular en la superficie">
+    <task id="LOCAL-00036" summary="imports">
       <option name="closed" value="true" />
-      <created>1748451582380</created>
+      <created>1748403673933</created>
       <option name="number" value="00036" />
       <option name="presentableId" value="LOCAL-00036" />
       <option name="project" value="LOCAL" />
-      <updated>1748451582380</updated>
+      <updated>1748403673933</updated>
     </task>
-    <task id="LOCAL-00037" summary="dibuja un borde futurista alrededor de un rectangulo.">
+    <task id="LOCAL-00037" summary="imports">
       <option name="closed" value="true" />
-      <created>1748451752777</created>
+      <created>1748403827135</created>
       <option name="number" value="00037" />
       <option name="presentableId" value="LOCAL-00037" />
       <option name="project" value="LOCAL" />
-      <updated>1748451752777</updated>
+      <updated>1748403827135</updated>
     </task>
-    <task id="LOCAL-00038" summary="dibuja una estela de particulas translucidas entre ddos puntos.&#10;crea un efecto de rastro o movimiento">
+    <task id="LOCAL-00038" summary="Simulador de un juego de persecucion y mapa">
       <option name="closed" value="true" />
-      <created>1748451907482</created>
+      <created>1748404571164</created>
       <option name="number" value="00038" />
       <option name="presentableId" value="LOCAL-00038" />
       <option name="project" value="LOCAL" />
-      <updated>1748451907482</updated>
+      <updated>1748404571164</updated>
     </task>
-    <task id="LOCAL-00039" summary="dibuja una estela de particulas translucidas entre ddos puntos.&#10;crea un efecto de rastro o movimiento">
+    <task id="LOCAL-00039" summary="Se crea el entorno">
       <option name="closed" value="true" />
-      <created>1748452032307</created>
+      <created>1748405288972</created>
       <option name="number" value="00039" />
       <option name="presentableId" value="LOCAL-00039" />
       <option name="project" value="LOCAL" />
-      <updated>1748452032307</updated>
+      <updated>1748405288972</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Normaliza la posición del jugador respecto al tamaño de la pantalla">
+      <option name="closed" value="true" />
+      <created>1748405697155</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1748405697155</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Retorna un diccionario con información adicional sobre el estado del entorno, útil para depuración y análisis pero no para la toma de decisiones directas del agente.">
+      <option name="closed" value="true" />
+      <created>1748405871432</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1748405871432</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Reinicia el entorno a su estado inicial, coloca al jugador, enemigos y obstáculos en posiciones válidas sin superposiciones">
+      <option name="closed" value="true" />
+      <created>1748406263850</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1748406263850</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Ejecuta un paso del entorno">
+      <option name="closed" value="true" />
+      <created>1748406990969</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1748406990969</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Actualización asíncrona del mapa para generar nuevos obstáculos">
+      <option name="closed" value="true" />
+      <created>1748407158731</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1748407158731</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -396,11 +443,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="se define una nueva clase enemigo que hereda de agente." />
-    <MESSAGE value="el metodo actualiza efectos visuales relacionados con la inteligencia artificial del enemigo." />
-    <MESSAGE value="se define la clase jugador que hereda de la clase Agente" />
-    <MESSAGE value="se define el metodo que crea proyectiles, los añade a la lista de proyectiles." />
-    <MESSAGE value="Dibuja los proyectiles en la superficie." />
     <MESSAGE value="permite la interaccion del usuario con el teclado para hacer el juego efectivo." />
     <MESSAGE value="se hacen las respectivas importaciones y se crea la clase obstaculofuturista con sus atributos" />
     <MESSAGE value="actualiza el estado interno de los efectos visuales del obstaculo." />
@@ -417,10 +459,26 @@
     <MESSAGE value="actualiza la posicion del proyectil, sus efectos y verifica colisiones." />
     <MESSAGE value="Dibuja el proyectil en la superficie de pygame." />
     <MESSAGE value="verifica si el proyectil ha colisionado con un agente dado." />
-    <MESSAGE value="se crea la clase para dibujar varios efectos visuales futuristas.&#10;el metodo dibuja un circulo con un efecto de brillo suave a su alrededor." />
-    <MESSAGE value="dibuja un hexagono regular en la superficie" />
-    <MESSAGE value="dibuja un borde futurista alrededor de un rectangulo." />
-    <MESSAGE value="dibuja una estela de particulas translucidas entre ddos puntos.&#10;crea un efecto de rastro o movimiento" />
-    <option name="LAST_COMMIT_MESSAGE" value="dibuja una estela de particulas translucidas entre ddos puntos.&#10;crea un efecto de rastro o movimiento" />
+    <MESSAGE value="imports" />
+    <MESSAGE value="Simulador de un juego de persecucion y mapa" />
+    <MESSAGE value="Se crea el entorno" />
+    <MESSAGE value="Normaliza la posición del jugador respecto al tamaño de la pantalla" />
+    <MESSAGE value="Retorna un diccionario con información adicional sobre el estado del entorno, útil para depuración y análisis pero no para la toma de decisiones directas del agente." />
+    <MESSAGE value="Reinicia el entorno a su estado inicial, coloca al jugador, enemigos y obstáculos en posiciones válidas sin superposiciones" />
+    <MESSAGE value="Ejecuta un paso del entorno" />
+    <MESSAGE value="Actualización asíncrona del mapa para generar nuevos obstáculos" />
+    <MESSAGE value="Función de renderizado para mostrar el estado actual del juego. Incluye un fondo futurista, obstáculos dinámicos, agentes y un HUD(Heads-Up Display)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Función de renderizado para mostrar el estado actual del juego. Incluye un fondo futurista, obstáculos dinámicos, agentes y un HUD(Heads-Up Display)." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/envs/persecucion_env.py</url>
+          <line>407</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
