@@ -235,6 +235,11 @@ class AlgoritmoPersecucionInteligente:
         
         self.poblacion_rutas = nueva_poblacion
 
+    def _seleccion_torneo(self, tamaño_torneo=3):
+      candidatos = random.sample(self.poblacion_rutas, 
+                                 min(tamaño_torneo, len(self.poblacion_rutas)))
+        return max(candidatos, key=lambda x: x['fitness'])
+
     
       
 
