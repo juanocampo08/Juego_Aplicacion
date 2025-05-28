@@ -251,6 +251,20 @@ class AlgoritmoPersecucionInteligente:
         
         return {'path': nueva_ruta, 'fitness': 0}
 
+    def _mutacion(self, tasa_mutacion=0.1):
+      for individuo in self.poblacion_rutas:
+            if random.random() < tasa_mutacion and individuo['path']:
+                idx = random.randint(0, len(individuo['path']) - 1)
+                pos_actual = individuo['path'][idx]
+                
+                dx = random.choice([-1, 0, 1])
+                dy = random.choice([-1, 0, 1])
+                nueva_pos = (pos_actual[0] + dy, pos_actual[1] + dx)
+                
+                if (0 <= nueva_pos[0] < self.rows and 
+                    0 <= nueva_pos[1] < self.cols):
+                    individuo['path'][idx] = nueva_pos
+
     
 
     
