@@ -61,8 +61,6 @@ class PersecucionPygameEnv(gym.Env):
         self.pantalla = None
         self.clock = None
         self.font = None
-
-
         self.jugador = None
         self.enemigos = []
         self.obstaculos = []
@@ -77,3 +75,25 @@ class PersecucionPygameEnv(gym.Env):
         self.usar_ia_inteligente = True
         self.tiempo_captura_promedio = []
         self.efectividad_ia = 0.0
+
+    def _get_obs(self):
+        player_x_norm = self.jugador.x / self.ancho_pantalla
+        player_y_norm = self.jugador.y / self.alto_pantalla
+
+        obs_list = []
+
+        for enemigo in self.enemigos:
+            ex_norm = enemigo.x / self.ancho_pantalla
+            ey_norm = enemigo.y / self.alto_pantalla
+            dx = self.jugador.x - enemigo.x
+            dy = self.jugador.y - enemigo.y
+            dist = max(math.hypot(dx, dy), 1.0)
+            dir_x = dx / dist
+            dir_y = dy / dist
+            dist_norm = min(dist / 300.0, 1.0)
+            obs_list.extend([ex_norm, ey_norm, dir_x, dir_y, dist_norm])
+
+        prog = self.pasos / self.max_pasos
+        obs_list.extend([player_x_norm, player_y_norm, prog])
+
+        return np.array(obs_list, dtype=np.float32)
