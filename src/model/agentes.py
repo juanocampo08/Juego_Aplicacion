@@ -123,6 +123,10 @@ class Agente:
         r, g, b = self.color[:3]
         return (min(255, r + 50), min(255, g + 50), min(255, b + 50))
 
+    def _draw_basic(self, superficie, center):
+        pygame.draw.circle(superficie, self.color, center, self.radio)
+        pygame.draw.circle(superficie, self.core_color, center, self.radio - 3)
+
 
 
 
