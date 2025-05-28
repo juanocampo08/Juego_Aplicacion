@@ -243,5 +243,11 @@ class Jugador(Agente):
         self.tiempo_ultimo_disparo = 0
         self.cadencia_disparo = 200
 
+    def disparar(self, target_x, target_y):
+        tiempo_actual = pygame.time.get_ticks()
+        if tiempo_actual - self.tiempo_ultimo_disparo >= self.cadencia_disparo:
+            proyectil = Proyectil(self.x, self.y, target_x, target_y)
+            self.proyectiles.append(proyectil)
+            self.tiempo_ultimo_disparo = tiempo_actual
 
 
