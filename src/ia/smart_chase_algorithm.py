@@ -220,6 +220,22 @@ class AlgoritmoPersecucionInteligente:
                         cambios_direccion += 1
                 fitness -= cambios_direccion * 5 
             individuo['fitness'] = fitness
+
+    def _seleccion_y_reproduccion(self):
+      nueva_poblacion = []
+        
+        self.poblacion_rutas.sort(key=lambda x: x['fitness'], reverse=True)
+        nueva_poblacion.extend(self.poblacion_rutas[:5])
+        
+        while len(nueva_poblacion) < len(self.poblacion_rutas):
+            padre1 = self._seleccion_torneo()
+            padre2 = self._seleccion_torneo()
+            hijo = self._cruce(padre1, padre2)
+            nueva_poblacion.append(hijo)
+        
+        self.poblacion_rutas = nueva_poblacion
+
+    
       
 
         
