@@ -650,3 +650,7 @@ class PersecucionPygameEnv(gym.Env):
     def render(self):
         return self._render_frame()
 
+    def close(self):
+        if self.pantalla is not None:
+            pygame.display.quit()
+            pygame.quit()
