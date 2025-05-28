@@ -122,3 +122,21 @@ class GeneradorDeMapas:
             obstaculos.append(ObstaculoFuturista(x, y, w, h))
             intentos += 1
         return obstaculos
+    def filtrar_obstaculos_sin_colisiones(self, mapa_json, entidades):
+        obstaculos_filtrados = []
+        for o in mapa_json:
+            rect = pygame.Rect(o["x"], o["y"], o["ancho"], o["alto"])
+
+            colisiona = False
+            for e in entidades:
+                entidad_rect = pygame.Rect(
+                    int(e.x - e.radio), int(e.y - e.radio),
+                    e.radio * 2, e.radio * 2
+                )
+                if rect.colliderect(entidad_rect):
+                    colisiona = True
+                    break
+
+            if not colisiona:
+                obstaculos_filtrados.append(ObstaculoFuturista(o["x"], o["y"], o["ancho"], o["alto"]))
+        return obstaculos_filtrados

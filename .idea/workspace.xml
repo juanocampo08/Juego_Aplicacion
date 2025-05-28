@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="creacion del run.">
+    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="genera un numero de obstaculos rectangulares, este puede usarse como alternativa a la generacion por API">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/mapa_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/mapa_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uv.lock" beforeDir="false" afterPath="$PROJECT_DIR$/uv.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -361,13 +359,34 @@
       <option name="project" value="LOCAL" />
       <updated>1748400941054</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Se crea la clase que genera dinamicamente el mapa el diseño de mapas, con sus respectivos elementos">
+      <option name="closed" value="true" />
+      <created>1748442740658</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1748442740658</updated>
+    </task>
+    <task id="LOCAL-00038" summary="obtiene un conjunto de obstaculos para el mapa usando API, el prompt se usa para diseñar estrategicamente diferentes pasajes para los agentes">
+      <option name="closed" value="true" />
+      <created>1748443747703</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1748443747703</updated>
+    </task>
+    <task id="LOCAL-00039" summary="genera un numero de obstaculos rectangulares, este puede usarse como alternativa a la generacion por API">
+      <option name="closed" value="true" />
+      <created>1748444162212</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1748444162212</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Dibuja al enemigo con un diseño amenazante, similar a un diamante con un nucleo rotatorio" />
-    <MESSAGE value="mover, mueve el agente y gestiona las colisiones con obstaculos y otros agentes. tambien actualiza los egectos visuales" />
-    <MESSAGE value="se define una nueva clase enemigo que hereda de agente." />
     <MESSAGE value="el metodo actualiza efectos visuales relacionados con la inteligencia artificial del enemigo." />
     <MESSAGE value="se define la clase jugador que hereda de la clase Agente" />
     <MESSAGE value="se define el metodo que crea proyectiles, los añade a la lista de proyectiles." />
@@ -390,6 +409,9 @@
     <MESSAGE value="verifica si el proyectil ha colisionado con un agente dado." />
     <MESSAGE value="creacion del metodo main, dando el modo de juego, modo ia, modelo path, velocidad, timesteps" />
     <MESSAGE value="creacion del run." />
-    <option name="LAST_COMMIT_MESSAGE" value="creacion del run." />
+    <MESSAGE value="Se crea la clase que genera dinamicamente el mapa el diseño de mapas, con sus respectivos elementos" />
+    <MESSAGE value="obtiene un conjunto de obstaculos para el mapa usando API, el prompt se usa para diseñar estrategicamente diferentes pasajes para los agentes" />
+    <MESSAGE value="genera un numero de obstaculos rectangulares, este puede usarse como alternativa a la generacion por API" />
+    <option name="LAST_COMMIT_MESSAGE" value="genera un numero de obstaculos rectangulares, este puede usarse como alternativa a la generacion por API" />
   </component>
 </project>
