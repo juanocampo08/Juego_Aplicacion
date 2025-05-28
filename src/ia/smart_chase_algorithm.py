@@ -405,6 +405,9 @@ class AlgoritmoPersecucionInteligente:
         except ValueError:
             return 8
 
+    def calcular_accion_inteligente(enemigo, jugador, obstaculos, algoritmo_ia, modo="hibrido"):
+      return algoritmo_ia.calcular_mejor_accion(enemigo, jugador, obstaculos, modo)
+
     
 
     
