@@ -63,3 +63,15 @@ class ObstaculoFuturista:
         inner_color = (int(150 + pulse_intensity * 105), int(180 + pulse_intensity * 75), 255)
         inner_size = int((self.rect.width // 6) * (0.5 + pulse_intensity * 0.5))
         pygame.draw.circle(superficie, inner_color, center, inner_size)
+
+    def _draw_barrier_obstacle(self, superficie):
+        pygame.draw.rect(superficie, (40, 60, 80), self.rect)
+
+
+        for i in range(5):
+            alpha = int(50 + 30 * (math.sin(self.energy_pulse + i * 0.5) + 1) / 2)
+            barrier_surface = pygame.Surface((self.rect.width, 4), pygame.SRCALPHA)
+            barrier_color = (0, 150, 255, alpha)
+            pygame.draw.rect(barrier_surface, barrier_color, (0, 0, self.rect.width, 4))
+            y_pos = self.rect.y + i * (self.rect.height // 5)
+            superficie.blit(barrier_surface, (self.rect.x, y_pos))
