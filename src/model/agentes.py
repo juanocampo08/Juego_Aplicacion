@@ -228,6 +228,8 @@ class Enemigo(Agente):
         self.alert_level = 0
 
         self.dano_contacto = 15
+    def update_ai_effects(self):
+        self.scan_angle += 5
 
 
 
