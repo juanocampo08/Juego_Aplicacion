@@ -16,3 +16,73 @@ class GeneradorDeMapas:
     def __init__(self, api_key=API_KEY, modelo_api="deepseek/deepseek-prover-v2:free"):
         self.api_key = api_key
         self.modelo_api = modelo_api
+
+    def obtener_mapa_aleatorio(self, ancho, alto, num_obstaculos=5, radio_jugador=10, radio_enemigo=12):
+
+        if not self.api_key:
+            print("Advertencia: No se ha proporcionado una clave API. No se generará el mapa.")
+            return []
+
+        prompt = (
+            f"Generate exactly {num_obstaculos} rectangular obstacles for a {ancho}x{alto} pixel video game map. "
+            f"MANDATORY REQUIREMENTS:\n"
+            f"- ALWAYS include one central obstacle near the map center\n"
+            f"- Create a challenging but playable level with STRATEGIC GAP SIZES:\n"
+            f"  * Player radius: {radio_jugador}px, Enemy radius: {radio_enemigo}px\n"
+            f"  * Create some narrow gaps ({radio_enemigo * 2 + 5}-{radio_jugador * 2 - 5}px) where ONLY enemies can fit through\n"
+            f"  * Create wider passages ({radio_jugador * 2 + 10}px+) where both player and enemies can move\n"
+            f"- Use tight spaces as enemy escape routes and tactical advantages\n"
+            f"- Vary obstacle sizes: small (30-80px), medium (80-150px), large (150-300px)\n"
+            f"- Position obstacles to create chokepoints and enemy-only shortcuts\n"
+            f"- Keep all obstacles within bounds (0,0) to ({ancho},{alto})\n"
+            f"- Prevent complete obstacle overlap but allow strategic narrow passages\n"
+            f"- Leave spawn areas clear near corners\n\n"
+            f"TACTICAL DESIGN GOAL: Create cat-and-mouse gameplay where smaller enemies can escape through gaps the larger player cannot follow.\n\n"
+            f"OUTPUT FORMAT:\n"
+            f"CRITICAL: Respond with ONLY a valid JSON array. No explanations, no markdown, no extra text.\n"
+            f"Example format: [{{\"x\":100,\"y\":100,\"ancho\":50,\"alto\":150}}]"
+        )
+
+        try:
+            response = requests.post(
+                "https://openrouter.ai/api/v1/chat/completions",
+                headers={
+                    "Authorization": f"Bearer {self.api_key}",
+                    "Content-Type": "application/json"
+                },
+                json={
+                    "model": self.modelo_api,
+                    "messages": [{"role": "user", "content": prompt}],
+                    "max_tokens": 200,
+                    "temperature": 0.7
+                }
+            )
+            response.raise_for_status()
+
+            content = response.json()["choices"][0]["message"]["content"]
+        except requests.exceptions.RequestException as e:
+            print(f"[MAPA API FALLÓ] Usando fallback local: {e}")
+            return [{"x": o.x, "y": o.y, "ancho": o.ancho, "alto": o.alto} for o in
+                    self.generar_obstaculos_sin_colision(ancho, alto, [], num_obstaculos)]
+        except KeyError as e:
+            print(f"Error al parsear la respuesta JSON de la API (clave faltante): {e}")
+            print(f"Contenido completo de la respuesta: {response.text}")
+            return []
+        except Exception as e:
+            print(f"Error inesperado al obtener el mapa: {e}")
+            return []
+
+        try:
+            return json.loads(content)
+        except json.JSONDecodeError:
+            print("El contenido de la API no es JSON puro. Intentando extraer JSON con regex...")
+            json_str = re.search(r"\[.*\]", content, re.DOTALL)
+            if json_str:
+                try:
+                    return json.loads(json_str.group(0))
+                except json.JSONDecodeError as e:
+                    print(f"Error al parsear JSON extraído con regex: {e}")
+            print("No se pudo extraer un JSON válido de la respuesta de la API.")
+            return []
+
+
