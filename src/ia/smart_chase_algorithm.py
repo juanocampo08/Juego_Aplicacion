@@ -9,3 +9,60 @@ class AlgoritmoPersecucionInteligente:
         self.historial_jugador = deque(maxlen=10) # Historial de posiciones del jugador para la predicción de movimiento.
         self.poblacion_rutas = []
     
+    def calcular_mejor_accion(self, enemigo, jugador, obstaculos, modo="hibrido"):
+      
+      if modo == "hibrido":
+            return self._algoritmo_hibrido(enemigo, jugador, obstaculos)
+        elif modo == "predictivo":
+            return self._a_star_predictivo(enemigo, jugador, obstaculos)
+        elif modo == "campo_potencial":
+            return self._campo_potencial(enemigo, jugador, obstaculos)
+        elif modo == "genetico":
+            return self._algoritmo_genetico(enemigo, jugador, obstaculos)
+        else:
+            return self._a_star_predictivo(enemigo, jugador, obstaculos)
+
+    def _algoritmo_hibrido(self, enemigo, jugador, obstaculos):
+      self._actualizar_historial_jugador(jugador) # Actualiza el historial de posiciones del jugador para la predicción.
+
+      dx = jugador.x - enemigo.x
+      dy = jugador.y - enemigo.y
+      distancia = math.hypot(dx, dy)
+      UMBRAL_LEJOS_GEN = 300   
+      UMBRAL_LEJOS = 200       
+      UMBRAL_CERCA = 80
+
+      if distancia > UMBRAL_LEJOS_GEN:
+            return self._algoritmo_genetico(enemigo, jugador, obstaculos, generaciones=3)
+        elif distancia > UMBRAL_LEJOS:
+            return self._a_star_predictivo(enemigo, jugador, obstaculos)
+        else:
+            if not self._hay_obstaculo_directo(enemigo, jugador, obstaculos):
+                return self._campo_potencial(enemigo, jugador, obstaculos)
+            else:
+                return self._a_star_predictivo(enemigo, jugador, obstaculos)
+
+    def _hay_obstaculo_directo(self, enemigo, jugador, obstaculos):
+      steps = int(max(abs(enemigo.x - jugador.x), abs(enemigo.y - jugador.y)) // self.cell_size)
+        if steps == 0:
+            return False
+
+        for i in range(1, steps + 1):
+            t = i / float(steps)
+            # Calcular el punto intermedio en la línea.
+            x_inter = enemigo.x + (jugador.x - enemigo.x) * t
+            y_inter = enemigo.y + (jugador.y - enemigo.y) * t
+            punto = pygame.Rect(int(x_inter), int(y_inter), 2, 2)
+            for obs in obstaculos:
+                if punto.colliderect(obs.rect):
+                    return True
+        return False
+
+        
+      
+
+
+
+          
+
+    
