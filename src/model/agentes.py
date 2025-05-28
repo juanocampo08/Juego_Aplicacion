@@ -127,6 +127,30 @@ class Agente:
         pygame.draw.circle(superficie, self.color, center, self.radio)
         pygame.draw.circle(superficie, self.core_color, center, self.radio - 3)
 
+    def _draw_player(self, superficie, center):
+        shield_points = []
+        for i in range(8):
+            angle = (i * math.pi / 4) + math.radians(self.shield_rotation)
+            x = center[0] + (self.radio + 8) * math.cos(angle)
+            y = center[1] + (self.radio + 8) * math.sin(angle)
+            shield_points.append((x, y))
+
+        for i in range(0, len(shield_points), 2):
+            start = shield_points[i]
+            end = shield_points[(i + 1) % len(shield_points)]
+            pygame.draw.line(superficie, (0, 150, 255), start, end, 3)  # Azul claro para el escudo.
+
+        VisualEffects.draw_hexagon(superficie, (0, 100, 255), center, self.radio - 2)  # Hexágono exterior
+        VisualEffects.draw_hexagon(superficie, (100, 200, 255), center, self.radio - 5)  # Hexágono interior
+
+        pygame.draw.circle(superficie, (200, 230, 255), center, 3)
+
+        for i in range(4):
+            angle = i * math.pi / 2 + self.pulse_phase  # Desfase para que roten.
+            energy_x = center[0] + 6 * math.cos(angle)
+            energy_y = center[1] + 6 * math.sin(angle)
+            pygame.draw.circle(superficie, (0, 255, 255), (int(energy_x), int(energy_y)), 2)
+
 
 
 
