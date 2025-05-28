@@ -14,3 +14,11 @@ from model.agentes import Jugador, Enemigo
 from model.entorno import ObstaculoFuturista, PowerUpSalud
 from utils.visual_effects import VisualEffects
 from utils.pantallas import pantalla_bienvenida, pantalla_game_over
+
+
+
+generador_mapa = GeneradorDeMapas()
+
+class PersecucionPygameEnv(gym.Env):
+
+    metadata = {"render_modes": ["human", "rgb_array"], "render_fps": 60}
