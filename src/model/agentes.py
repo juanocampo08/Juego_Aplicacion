@@ -6,8 +6,8 @@ import sys
 sys.path.append("src")
 
 
-from model.proyectil import Proyectil
-from utils.visual_effects import VisualEffects
+from src.model.proyectil import Proyectil
+from src.utils.visual_effects import VisualEffects
 
 class Agente:
     def __init__(self, x, y, color, radio = 10, velocidad =  5, agent_type = "basic", vida_maxima = 100):
