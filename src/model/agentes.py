@@ -254,4 +254,42 @@ class Jugador(Agente):
         for proyectil in self.proyectiles:
             proyectil.dibujar(superficie)
 
+    def manejar_input(self, obstaculos =  None, otros_agentes = None):
+        dx = 0
+        dy = 0
+        keys = pygame.key.get_pressed()
+
+        mouse_buttons = pygame.mouse.get_pressed()
+        if mouse_buttons[0]:
+            mouse_x, mouse_y = pygame.mouse.get_pos()
+            self.disparar(mouse_x, mouse_y)
+
+        l_shift_pressed = keys[pygame.K_LSHIFT]
+
+        if keys[pygame.K_a]:
+            dx = -1
+        elif keys[pygame.K_d]:
+            dx = 1
+
+        if keys[pygame.K_w]:
+            dy = -1
+        elif keys[pygame.K_s]:
+            dy = 1
+
+        if l_shift_pressed and self.boost_energy > 0 and not self.boost_locked:
+            speed_multiplier = 1.5
+            self.boost_energy = max(0, self.boost_energy - 2)
+            self.velocidad = 5 * speed_multiplier
+
+            if self.boost_energy == 0:
+                self.boost_locked = True
+        else:
+            if not l_shift_pressed:
+                self.boost_locked = False
+
+            if not self.boost_locked:
+                self.boost_energy = min(100, self.boost_energy + 1)
+            self.velocidad = 5
+
+        self.mover(dx, dy, obstaculos, otros_agentes)
 

@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="el metodo actualiza efectos visuales relacionados con la inteligencia artificial del enemigo.">
+    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="Dibuja los proyectiles en la superficie.">
       <change beforePath="$PROJECT_DIR$/src/model/agentes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/agentes.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -190,7 +190,31 @@
       <option name="project" value="LOCAL" />
       <updated>1748393913464</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="se define la clase jugador que hereda de la clase Agente">
+      <option name="closed" value="true" />
+      <created>1748394668571</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1748394668571</updated>
+    </task>
+    <task id="LOCAL-00017" summary="se define el metodo que crea proyectiles, los añade a la lista de proyectiles.">
+      <option name="closed" value="true" />
+      <created>1748394879659</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1748394879659</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Dibuja los proyectiles en la superficie.">
+      <option name="closed" value="true" />
+      <created>1748395132020</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1748395132020</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -209,6 +233,9 @@
     <MESSAGE value="mover, mueve el agente y gestiona las colisiones con obstaculos y otros agentes. tambien actualiza los egectos visuales" />
     <MESSAGE value="se define una nueva clase enemigo que hereda de agente." />
     <MESSAGE value="el metodo actualiza efectos visuales relacionados con la inteligencia artificial del enemigo." />
-    <option name="LAST_COMMIT_MESSAGE" value="el metodo actualiza efectos visuales relacionados con la inteligencia artificial del enemigo." />
+    <MESSAGE value="se define la clase jugador que hereda de la clase Agente" />
+    <MESSAGE value="se define el metodo que crea proyectiles, los añade a la lista de proyectiles." />
+    <MESSAGE value="Dibuja los proyectiles en la superficie." />
+    <option name="LAST_COMMIT_MESSAGE" value="Dibuja los proyectiles en la superficie." />
   </component>
 </project>
