@@ -102,6 +102,35 @@ class AlgoritmoPersecucionInteligente:
             path = self._a_star_con_heuristica_mejorada(grid, start, goal_actual)
       return self._path_a_accion(path, start)
 
+    def _campo_potencial(self, enemigo, jugador, obstaculos):
+      fx_atractiva = (jugador.x - enemigo.x)
+      fy_atractiva = (jugador.y - enemigo.y)
+      
+      dist_jugador = max(math.sqrt(fx_atractiva**2 + fy_atractiva**2), 1)
+      fx_atractiva = fx_atractiva / dist_jugador * 10
+      fy_atractiva = fy_atractiva / dist_jugador * 10
+      
+      fx_repulsiva = 0
+      fy_repulsiva = 0
+      
+      radio_evitacion = 25 
+      for obstaculo in obstaculos:
+          dist_x = enemigo.x - (obstaculo.x + obstaculo.ancho/2)
+          dist_y = enemigo.y - (obstaculo.y + obstaculo.alto/2)
+          distancia = math.sqrt(dist_x**2 + dist_y**2)
+            
+          if distancia < 25:
+            factor_repulsion = 500 / max(distancia**2, 1)
+            fx_repulsiva += (dist_x / max(distancia, 1)) * factor_repulsion
+            fy_repulsiva += (dist_y / max(distancia, 1)) * factor_repulsion
+            
+      fx_total = fx_atractiva + fx_repulsiva
+      fy_total = fy_atractiva + fy_repulsiva
+      return self._fuerza_a_accion(fx_total, fy_total)
+
+    
+      
+
         
       
 
