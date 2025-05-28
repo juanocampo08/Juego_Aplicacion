@@ -49,4 +49,4 @@ if __name__ == "__main__":
         - VELOCIDAD_JUEGO: FPS del juego (mayor velocidad = entrenamiento más rápido)
         - TIMESTEPS: Número de pasos de entrenamiento (solo para modo entrenar)
     """
-    main(modo="jugar", modo_ia="hibrido", modelo_path="src/ml_model/best_model", velocidad_juego=240, timesteps=300000)
+    main(modo="jugar", modo_ia="hibrido", modelo_path="src/ml_model/best_model.zip", velocidad_juego=240, timesteps=300000)
