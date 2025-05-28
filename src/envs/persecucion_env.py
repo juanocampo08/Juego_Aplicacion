@@ -414,7 +414,6 @@ class PersecucionPygameEnv(gym.Env):
                 self.enemigos[0].radio + self.jugador.radio):  # Asume que todos los enemigos tienen el mismo radio
             recompensa += 300
 
-        # Recompensa adaptativa por acercarse al jugador.
         if hasattr(self, 'distancia_anterior') and self.distancia_anterior is not None:
             diferencia_distancia = self.distancia_anterior - distancia_actual  # Recompensa por la reducción de distancia
             # Un factor de distancia que aumenta la recompensa cuando la distancia es menor,
@@ -422,10 +421,8 @@ class PersecucionPygameEnv(gym.Env):
             factor_distancia = 1.0 + (200 - min(distancia_actual, 200)) / 200
             recompensa += diferencia_distancia * factor_distancia * 3.0
 
-        # Penalización por tiempo, para fomentar la eficiencia en la captura.
         recompensa -= 0.01
 
-        # Penalización por colisiones con obstáculos.
         rect_enemigo = pygame.Rect(
             int(self.enemigos[0].x - self.enemigos[0].radio),  # Asume que solo se considera el primer enemigo
             int(self.enemigos[0].y - self.enemigos[0].radio),
@@ -438,19 +435,16 @@ class PersecucionPygameEnv(gym.Env):
                 colision = True
                 break
         if not colision:
-            recompensa += 0.5  # Pequeña recompensa por evitar obstáculos
+            recompensa += 0.5
 
-        # Penalización extra por quedarse quieto.
         if accion == 8:
             recompensa -= 1.0
 
-        # Recompensa por eficiencia: mayor recompensa si el enemigo está muy cerca del jugador.
         if distancia_actual < 50:
             recompensa += (50 - distancia_actual) * 0.15
 
-        # Penalización por zigzagueo, para fomentar movimientos más suaves y directos.
         if hasattr(self, 'accion_anterior'):
-            if accion != self.accion_anterior and accion != 8:  # Si la acción cambia y no es "quieto"
+            if accion != self.accion_anterior and accion != 8:
                 recompensa -= 0.2
         self.accion_anterior = accion
 
