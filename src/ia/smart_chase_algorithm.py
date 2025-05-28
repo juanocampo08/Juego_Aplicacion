@@ -283,6 +283,63 @@ class AlgoritmoPersecucionInteligente:
                         grid[i][j] = 1
         
         return grid
+
+    def _a_star_con_heuristica_mejorada(self, grid, start, goal):
+      heap = []
+        heapq.heappush(heap, (0, start))
+        came_from = {start: None}
+        cost_so_far = {start: 0}
+        
+        while heap:
+            _, current = heapq.heappop(heap)
+            
+            if current == goal:
+                break 
+            
+            for di in [-1, 0, 1]:
+                for dj in [-1, 0, 1]:
+                    if di == 0 and dj == 0:
+                        continue
+                    
+                    ni, nj = current[0] + di, current[1] + dj
+                    
+                    if (0 <= ni < self.rows and 0 <= nj < self.cols and 
+                        grid[ni][nj] == 0):
+                        
+                        move_cost = 1.414 if di != 0 and dj != 0 else 1.0
+                        
+                        if current in came_from and came_from[current]:
+                            prev = came_from[current]
+                            prev_dir = (current[0] - prev[0], current[1] - prev[1])
+                            curr_dir = (di, dj)
+                            if prev_dir != curr_dir:
+                                move_cost += 0.1
+                        
+                        new_cost = cost_so_far[current] + move_cost
+                        neighbor = (ni, nj)
+                        
+                        if neighbor not in cost_so_far or new_cost < cost_so_far[neighbor]:
+                            cost_so_far[neighbor] = new_cost
+                            
+                            h_manhattan = abs(goal[0] - ni) + abs(goal[1] - nj)
+                            h_euclidiana = math.sqrt((goal[0] - ni)**2 + (goal[1] - nj)**2)
+                            heuristica = 0.7 * h_euclidiana + 0.3 * h_manhattan
+                            
+                            priority = new_cost + heuristica
+                            heapq.heappush(heap, (priority, neighbor))
+                            came_from[neighbor] = current 
+        
+        if goal not in came_from:
+            return [] 
+        
+        path = []
+        node = goal
+        while node is not None:
+            path.append(node)
+            node = came_from.get(node)
+        path.reverse() 
+        
+        return path
     
 
     
