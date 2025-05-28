@@ -36,3 +36,16 @@ class VisualEffects:
 
         pygame.draw.polygon(surface, color, points)
         return points
+
+    @staticmethod
+    def draw_tech_border(surface, rect, color, thickness=2):
+
+        x, y, w, h = rect.x, rect.y, rect.width, rect.height
+        corner_size = 8
+        points = [
+            (x + corner_size, y), (x + w - corner_size, y),
+            (x + w, y + corner_size), (x + w, y + h - corner_size),
+            (x + w - corner_size, y + h), (x + corner_size, y + h),
+            (x, y + h - corner_size), (x, y + corner_size)
+        ]
+        pygame.draw.polygon(surface, color, points, thickness)
