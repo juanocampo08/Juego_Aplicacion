@@ -20,3 +20,7 @@ class ObstaculoFuturista:
         self.energy_pulse = random.uniform(0, 2 * math.pi)
         # Asigna un tipo de obstáculo aleatorio para variar la apariencia.
         self.obstacle_type = random.choice(["tech", "crystal", "barrier"])
+
+    def update(self):
+        self.energy_pulse += 0.05
+
