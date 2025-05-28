@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="se define el metodo de recibir daño de la clase agente">
+    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="se define el meotodo dibujar, este dibuja al agente con la ayuda de pygame con sus efectos futuristas">
       <change beforePath="$PROJECT_DIR$/src/model/agentes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/agentes.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -102,7 +102,23 @@
       <option name="project" value="LOCAL" />
       <updated>1748388832612</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="se define el metodo para actualizar los efectos">
+      <option name="closed" value="true" />
+      <created>1748389171086</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1748389171086</updated>
+    </task>
+    <task id="LOCAL-00006" summary="se define el meotodo dibujar, este dibuja al agente con la ayuda de pygame con sus efectos futuristas">
+      <option name="closed" value="true" />
+      <created>1748390515672</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1748390515672</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -110,6 +126,8 @@
     <MESSAGE value="Ajustes de archivos restantes." />
     <MESSAGE value="se definen atributos de la clase agente." />
     <MESSAGE value="se define el metodo de recibir daño de la clase agente" />
-    <option name="LAST_COMMIT_MESSAGE" value="se define el metodo de recibir daño de la clase agente" />
+    <MESSAGE value="se define el metodo para actualizar los efectos" />
+    <MESSAGE value="se define el meotodo dibujar, este dibuja al agente con la ayuda de pygame con sus efectos futuristas" />
+    <option name="LAST_COMMIT_MESSAGE" value="se define el meotodo dibujar, este dibuja al agente con la ayuda de pygame con sus efectos futuristas" />
   </component>
 </project>

@@ -86,6 +86,35 @@ class Agente:
         else:
             self._draw_basic(superficie, center)
 
+    def _draw_health_bar(self, superficie, center):
+        if self.vida_actual == self.vida_maxima:
+            return
+
+        bar_width = self.radio * 2 + 10
+        bar_height = 4
+
+        bar_x = center[0] - bar_width // 2
+        bar_y = center[1] - self.radio - 30
+
+        bg_rect = pygame.Rect(bar_x, bar_y, bar_width, bar_height)
+        pygame.draw.rect(superficie, (50, 50, 50), bg_rect)
+
+        vida_porcentaje = self.vida_actual / self.vida_maxima
+        vida_width = int(bar_width * vida_porcentaje)
+
+        if vida_width > 0:
+            if vida_porcentaje > 0.6:
+                color_vida = (0, 255, 0)  # Verde
+            elif vida_porcentaje > 0.3:
+                color_vida = (255, 255, 0)  # Amarillo
+            else:
+                color_vida = (255, 0, 0)  # Rojo
+
+            vida_rect = pygame.Rect(bar_x, bar_y, vida_width, bar_height)
+            pygame.draw.rect(superficie, color_vida, vida_rect)
+
+        pygame.draw.rect(superficie, (150, 150, 150), bg_rect, 1)
+
 
 
 
