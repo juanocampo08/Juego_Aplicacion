@@ -84,3 +84,6 @@ class PowerUpSalud:
         self.tiempo_creacion = time.time()
         self.duracion = duracion
         self.activo = True
+
+    def rect(self):
+        return pygame.Rect(self.x - self.radio, self.y - self.radio, self.radio * 2, self.radio * 2)
