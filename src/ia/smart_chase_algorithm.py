@@ -41,6 +41,24 @@ class AlgoritmoPersecucionInteligente:
                 return self._campo_potencial(enemigo, jugador, obstaculos)
             else:
                 return self._a_star_predictivo(enemigo, jugador, obstaculos)
+
+    def _hay_obstaculo_directo(self, enemigo, jugador, obstaculos):
+      steps = int(max(abs(enemigo.x - jugador.x), abs(enemigo.y - jugador.y)) // self.cell_size)
+        if steps == 0:
+            return False
+
+        for i in range(1, steps + 1):
+            t = i / float(steps)
+            # Calcular el punto intermedio en la línea.
+            x_inter = enemigo.x + (jugador.x - enemigo.x) * t
+            y_inter = enemigo.y + (jugador.y - enemigo.y) * t
+            punto = pygame.Rect(int(x_inter), int(y_inter), 2, 2)
+            for obs in obstaculos:
+                if punto.colliderect(obs.rect):
+                    return True
+        return False
+
+        
       
 
 
