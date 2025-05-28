@@ -452,7 +452,6 @@ class PersecucionPygameEnv(gym.Env):
         return recompensa
 
     def _render_frame(self):
-
         if self.pantalla is None:
             pygame.init()
             pygame.display.init()

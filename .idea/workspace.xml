@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="Función de renderizado para mostrar el estado actual del juego. Incluye un fondo futurista, obstáculos dinámicos, agentes y un HUD(Heads-Up Display).">
-      <change beforePath="$PROJECT_DIR$/.idea/Juego_Aplicacion.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Juego_Aplicacion.iml" afterDir="false" />
+    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="Se dibuja el Heads-Up Display (HUD)con un estilo futurista, incluyendo barra de vida, puntos, enemigos restantes, barra de energía y un minimapa.">
+      <change beforePath="$PROJECT_DIR$/src/envs/persecucion_env.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/envs/persecucion_env.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +51,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Rebasing master",
+    "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true"
   }
 }]]></component>
@@ -436,7 +436,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748455333173</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Se dibuja el Heads-Up Display (HUD)con un estilo futurista, incluyendo barra de vida, puntos, enemigos restantes, barra de energía y un minimapa.">
+      <option name="closed" value="true" />
+      <created>1748455881337</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1748455881337</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -451,7 +459,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="permite la interaccion del usuario con el teclado para hacer el juego efectivo." />
     <MESSAGE value="se hacen las respectivas importaciones y se crea la clase obstaculofuturista con sus atributos" />
     <MESSAGE value="actualiza el estado interno de los efectos visuales del obstaculo." />
     <MESSAGE value="este metodo dibuja el obstaculo en la superficie" />
@@ -476,7 +483,8 @@
     <MESSAGE value="Ejecuta un paso del entorno" />
     <MESSAGE value="Actualización asíncrona del mapa para generar nuevos obstáculos" />
     <MESSAGE value="Función de renderizado para mostrar el estado actual del juego. Incluye un fondo futurista, obstáculos dinámicos, agentes y un HUD(Heads-Up Display)." />
-    <option name="LAST_COMMIT_MESSAGE" value="Función de renderizado para mostrar el estado actual del juego. Incluye un fondo futurista, obstáculos dinámicos, agentes y un HUD(Heads-Up Display)." />
+    <MESSAGE value="Se dibuja el Heads-Up Display (HUD)con un estilo futurista, incluyendo barra de vida, puntos, enemigos restantes, barra de energía y un minimapa." />
+    <option name="LAST_COMMIT_MESSAGE" value="Se dibuja el Heads-Up Display (HUD)con un estilo futurista, incluyendo barra de vida, puntos, enemigos restantes, barra de energía y un minimapa." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -488,8 +496,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/envs/persecucion_env.py</url>
-          <line>459</line>
-          <option name="timeStamp" value="3" />
+          <line>547</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
