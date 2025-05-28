@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="Reinicia el entorno a su estado inicial, coloca al jugador, enemigos y obstáculos en posiciones válidas sin superposiciones" />
+    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="Ejecuta un paso del entorno" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -409,7 +409,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748406263850</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Ejecuta un paso del entorno">
+      <option name="closed" value="true" />
+      <created>1748406990969</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1748406990969</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -424,7 +432,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="se define la clase jugador que hereda de la clase Agente" />
     <MESSAGE value="se define el metodo que crea proyectiles, los añade a la lista de proyectiles." />
     <MESSAGE value="Dibuja los proyectiles en la superficie." />
     <MESSAGE value="permite la interaccion del usuario con el teclado para hacer el juego efectivo." />
@@ -449,6 +456,7 @@
     <MESSAGE value="Normaliza la posición del jugador respecto al tamaño de la pantalla" />
     <MESSAGE value="Retorna un diccionario con información adicional sobre el estado del entorno, útil para depuración y análisis pero no para la toma de decisiones directas del agente." />
     <MESSAGE value="Reinicia el entorno a su estado inicial, coloca al jugador, enemigos y obstáculos en posiciones válidas sin superposiciones" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reinicia el entorno a su estado inicial, coloca al jugador, enemigos y obstáculos en posiciones válidas sin superposiciones" />
+    <MESSAGE value="Ejecuta un paso del entorno" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ejecuta un paso del entorno" />
   </component>
 </project>

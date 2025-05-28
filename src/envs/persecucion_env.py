@@ -391,6 +391,17 @@ class PersecucionPygameEnv(gym.Env):
                 self.jugador.vida_actual = min(self.jugador.vida_maxima, self.jugador.vida_actual + 15)
                 self.powerups_salud.remove(powerup)
 
-        if time.time() - self.tiempo_ultimo_mapa[0] > self.INTERVALO_MAPA and not hasattr(self,"actualizando_mapa") and not self.modo_entrenamiento:
-            self.actualizando_mapa = True
+            if time.time() - self.tiempo_ultimo_mapa[0] > self.INTERVALO_MAPA and not hasattr(self,"actualizando_mapa") and not self.modo_entrenamiento:
+                self.actualizando_mapa = True
+
+                def set_mapa(nuevo_mapa):
+                    if nuevo_mapa:
+                        self.obstaculos = generador_mapa.filtrar_obstaculos_sin_colision(nuevo_mapa, [self.jugador] + self.enemigos)
+                    if hasattr(self, "actualizando_mapa"):
+                        delattr(self, "actualizando_mapa")
+                    self.tiempo_ultimo_mapa[0] = time.time()
+
+                generador_mapa.actualizar_mapa_async(self.ancho_pantalla, self.alto_pantalla, set_mapa)
+
+            return observation, recompensa, terminado, truncado, info
 
