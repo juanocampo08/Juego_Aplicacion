@@ -140,3 +140,12 @@ class GeneradorDeMapas:
             if not colisiona:
                 obstaculos_filtrados.append(ObstaculoFuturista(o["x"], o["y"], o["ancho"], o["alto"]))
         return obstaculos_filtrados
+
+    def actualizar_mapa_async(self, ancho, alto, callback):
+
+        def worker():
+
+            nuevo_mapa = self.obtener_mapa_aleatorio(ancho, alto)
+            callback(nuevo_mapa)
+
+        threading.Thread(target=worker, daemon=True).start()
