@@ -91,3 +91,11 @@ class PowerUpSalud:
     def actualizar(self):
         if time.time() - self.tiempo_creacion > self.duracion:
             self.activo = False
+
+    def dibujar(self, superficie):
+        if not self.activo:
+            return
+
+        pygame.draw.circle(superficie, (0, 255, 100), (int(self.x), int(self.y)), self.radio)
+        VisualEffects.draw_glow_circle(superficie, (0, 255, 100), (int(self.x), int(self.y)), self.radio,
+                                       self.radio + 10)
