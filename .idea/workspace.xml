@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="verifica si el proyectil ha colisionado con un agente dado.">
-      <change beforePath="$PROJECT_DIR$/.idea/Juego_Aplicacion.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Juego_Aplicacion.iml" afterDir="false" />
-    </list>
+    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="dibuja una estela de particulas translucidas entre ddos puntos.&#10;crea un efecto de rastro o movimiento" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,12 +26,12 @@
     &quot;assignee&quot;: &quot;juanocampo08&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/juanocampo08/Juego_Aplicacion.git",
-    "accountId": "29a1b830-d935-4637-bcce-11927151e0b2"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/juanocampo08/Juego_Aplicacion.git&quot;,
+    &quot;accountId&quot;: &quot;29a1b830-d935-4637-bcce-11927151e0b2&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -343,7 +341,47 @@
       <option name="project" value="LOCAL" />
       <updated>1748399905537</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="se crea la clase para dibujar varios efectos visuales futuristas.&#10;el metodo dibuja un circulo con un efecto de brillo suave a su alrededor.">
+      <option name="closed" value="true" />
+      <created>1748451303762</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1748451303762</updated>
+    </task>
+    <task id="LOCAL-00036" summary="dibuja un hexagono regular en la superficie">
+      <option name="closed" value="true" />
+      <created>1748451582380</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1748451582380</updated>
+    </task>
+    <task id="LOCAL-00037" summary="dibuja un borde futurista alrededor de un rectangulo.">
+      <option name="closed" value="true" />
+      <created>1748451752777</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1748451752777</updated>
+    </task>
+    <task id="LOCAL-00038" summary="dibuja una estela de particulas translucidas entre ddos puntos.&#10;crea un efecto de rastro o movimiento">
+      <option name="closed" value="true" />
+      <created>1748451907482</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1748451907482</updated>
+    </task>
+    <task id="LOCAL-00039" summary="dibuja una estela de particulas translucidas entre ddos puntos.&#10;crea un efecto de rastro o movimiento">
+      <option name="closed" value="true" />
+      <created>1748452032307</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1748452032307</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -358,10 +396,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="metodo que dibuja el agente como un circulo" />
-    <MESSAGE value="dibuja el jugador con un diseño futurista inlcuyendo su escudo y un nucleo hexagonal." />
-    <MESSAGE value="Dibuja al enemigo con un diseño amenazante, similar a un diamante con un nucleo rotatorio" />
-    <MESSAGE value="mover, mueve el agente y gestiona las colisiones con obstaculos y otros agentes. tambien actualiza los egectos visuales" />
     <MESSAGE value="se define una nueva clase enemigo que hereda de agente." />
     <MESSAGE value="el metodo actualiza efectos visuales relacionados con la inteligencia artificial del enemigo." />
     <MESSAGE value="se define la clase jugador que hereda de la clase Agente" />
@@ -383,6 +417,10 @@
     <MESSAGE value="actualiza la posicion del proyectil, sus efectos y verifica colisiones." />
     <MESSAGE value="Dibuja el proyectil en la superficie de pygame." />
     <MESSAGE value="verifica si el proyectil ha colisionado con un agente dado." />
-    <option name="LAST_COMMIT_MESSAGE" value="verifica si el proyectil ha colisionado con un agente dado." />
+    <MESSAGE value="se crea la clase para dibujar varios efectos visuales futuristas.&#10;el metodo dibuja un circulo con un efecto de brillo suave a su alrededor." />
+    <MESSAGE value="dibuja un hexagono regular en la superficie" />
+    <MESSAGE value="dibuja un borde futurista alrededor de un rectangulo." />
+    <MESSAGE value="dibuja una estela de particulas translucidas entre ddos puntos.&#10;crea un efecto de rastro o movimiento" />
+    <option name="LAST_COMMIT_MESSAGE" value="dibuja una estela de particulas translucidas entre ddos puntos.&#10;crea un efecto de rastro o movimiento" />
   </component>
 </project>
