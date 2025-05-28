@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="se define el meotodo dibujar, este dibuja al agente con la ayuda de pygame con sus efectos futuristas">
+    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="se define el metodo que dibuja la barra encima del agente , mostrando solo la vida actual siendo esta es diferente de la vida maxima.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/agentes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/agentes.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -118,7 +119,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748390515672</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="se define el metodo que dibuja la barra encima del agente , mostrando solo la vida actual siendo esta es diferente de la vida maxima.">
+      <option name="closed" value="true" />
+      <created>1748391061721</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1748391061721</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -128,6 +137,7 @@
     <MESSAGE value="se define el metodo de recibir daño de la clase agente" />
     <MESSAGE value="se define el metodo para actualizar los efectos" />
     <MESSAGE value="se define el meotodo dibujar, este dibuja al agente con la ayuda de pygame con sus efectos futuristas" />
-    <option name="LAST_COMMIT_MESSAGE" value="se define el meotodo dibujar, este dibuja al agente con la ayuda de pygame con sus efectos futuristas" />
+    <MESSAGE value="se define el metodo que dibuja la barra encima del agente , mostrando solo la vida actual siendo esta es diferente de la vida maxima." />
+    <option name="LAST_COMMIT_MESSAGE" value="se define el metodo que dibuja la barra encima del agente , mostrando solo la vida actual siendo esta es diferente de la vida maxima." />
   </component>
 </project>

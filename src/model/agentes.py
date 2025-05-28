@@ -115,6 +115,11 @@ class Agente:
 
         pygame.draw.rect(superficie, (150, 150, 150), bg_rect, 1)
 
+    def _calculate_core_color(self):
+        r, g, b = self.color[:3]
+        return (min(255, r + 100), min(255, g + 100), min(255, b + 100))
+
+
 
 
 
