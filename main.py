@@ -2,7 +2,7 @@ import sys
 
 sys.path.append("src")
 
-from utils.modos_juego import jugar_con_modelo_mejorado, entrenar_modelo_mejorado
+from src.utils.modos_juego import jugar_con_modelo_mejorado, entrenar_modelo_mejorado
 
 def main(modo = "jugar", modo_ia = "hibrido", modelo_path = "src/ml_model/best_model", velocidad_juego = 240, timesteps = 300000):
     MODO = modo

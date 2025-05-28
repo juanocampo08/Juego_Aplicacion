@@ -5,7 +5,7 @@ import random
 import sys
 
 sys.path.append("src")
-from utils.visual_effects import VisualEffects
+from src.utils.visual_effects import VisualEffects
 
 class ObstaculoFuturista:
     def __init__(self, x, y, ancho, alto):

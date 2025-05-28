@@ -1,6 +1,13 @@
+import heapq
+import pygame
+import random
+from collections import deque
+import math
+
+
 class AlgoritmoPersecucionInteligente:
   def __init__(self, ancho_mapa, alto_mapa, cell_size=15):
-    self.ancho_mapa = ancho_mapa
+        self.ancho_mapa = ancho_mapa
         self.alto_mapa = alto_mapa
         self.cell_size = cell_size
         self.cols = ancho_mapa // cell_size
@@ -23,8 +30,7 @@ class AlgoritmoPersecucionInteligente:
             return self._a_star_predictivo(enemigo, jugador, obstaculos)
 
     def _algoritmo_hibrido(self, enemigo, jugador, obstaculos):
-      self._actualizar_historial_jugador(jugador) # Actualiza el historial de posiciones del jugador para la predicción.
-
+      self._actualizar_historial_jugador(jugador)
       dx = jugador.x - enemigo.x
       dy = jugador.y - enemigo.y
       distancia = math.hypot(dx, dy)
@@ -214,6 +220,133 @@ class AlgoritmoPersecucionInteligente:
                         cambios_direccion += 1
                 fitness -= cambios_direccion * 5 
             individuo['fitness'] = fitness
+
+    def _seleccion_y_reproduccion(self):
+      nueva_poblacion = []
+        
+        self.poblacion_rutas.sort(key=lambda x: x['fitness'], reverse=True)
+        nueva_poblacion.extend(self.poblacion_rutas[:5])
+        
+        while len(nueva_poblacion) < len(self.poblacion_rutas):
+            padre1 = self._seleccion_torneo()
+            padre2 = self._seleccion_torneo()
+            hijo = self._cruce(padre1, padre2)
+            nueva_poblacion.append(hijo)
+        
+        self.poblacion_rutas = nueva_poblacion
+
+    def _seleccion_torneo(self, tamaño_torneo=3):
+      candidatos = random.sample(self.poblacion_rutas, 
+                                 min(tamaño_torneo, len(self.poblacion_rutas)))
+        return max(candidatos, key=lambda x: x['fitness'])
+
+    def _cruce(self, padre1, padre2):
+      
+      if not padre1['path'] or not padre2['path']:
+            return {'path': [], 'fitness': 0}
+        
+        punto_cruce = random.randint(1, min(len(padre1['path']), len(padre2['path'])) - 1)
+        
+        nueva_ruta = padre1['path'][:punto_cruce] + padre2['path'][punto_cruce:]
+        
+        return {'path': nueva_ruta, 'fitness': 0}
+
+    def _mutacion(self, tasa_mutacion=0.1):
+      for individuo in self.poblacion_rutas:
+            if random.random() < tasa_mutacion and individuo['path']:
+                idx = random.randint(0, len(individuo['path']) - 1)
+                pos_actual = individuo['path'][idx]
+                
+                dx = random.choice([-1, 0, 1])
+                dy = random.choice([-1, 0, 1])
+                nueva_pos = (pos_actual[0] + dy, pos_actual[1] + dx)
+                
+                if (0 <= nueva_pos[0] < self.rows and 
+                    0 <= nueva_pos[1] < self.cols):
+                    individuo['path'][idx] = nueva_pos
+
+    def _crear_grid_mejorado(self, obstaculos, margen_inflacion=15):
+      grid = [[0 for _ in range(self.cols)] for _ in range(self.rows)]
+        
+        for obstaculo in obstaculos:
+            rect_inflado = pygame.Rect(
+                obstaculo.x - margen_inflacion,
+                obstaculo.y - margen_inflacion,
+                obstaculo.ancho + 2 * margen_inflacion,
+                obstaculo.alto + 2 * margen_inflacion
+            )
+            
+            for i in range(self.rows):
+                for j in range(self.cols):
+                    x, y = self._grid_a_pos(i, j)
+                    if rect_inflado.collidepoint(x, y):
+                        grid[i][j] = 1
+        
+        return grid
+
+    def _a_star_con_heuristica_mejorada(self, grid, start, goal):
+      heap = []
+        heapq.heappush(heap, (0, start))
+        came_from = {start: None}
+        cost_so_far = {start: 0}
+        
+        while heap:
+            _, current = heapq.heappop(heap)
+            
+            if current == goal:
+                break 
+            
+            for di in [-1, 0, 1]:
+                for dj in [-1, 0, 1]:
+                    if di == 0 and dj == 0:
+                        continue
+                    
+                    ni, nj = current[0] + di, current[1] + dj
+                    
+                    if (0 <= ni < self.rows and 0 <= nj < self.cols and 
+                        grid[ni][nj] == 0):
+                        
+                        move_cost = 1.414 if di != 0 and dj != 0 else 1.0
+                        
+                        if current in came_from and came_from[current]:
+                            prev = came_from[current]
+                            prev_dir = (current[0] - prev[0], current[1] - prev[1])
+                            curr_dir = (di, dj)
+                            if prev_dir != curr_dir:
+                                move_cost += 0.1
+                        
+                        new_cost = cost_so_far[current] + move_cost
+                        neighbor = (ni, nj)
+                        
+                        if neighbor not in cost_so_far or new_cost < cost_so_far[neighbor]:
+                            cost_so_far[neighbor] = new_cost
+                            
+                            h_manhattan = abs(goal[0] - ni) + abs(goal[1] - nj)
+                            h_euclidiana = math.sqrt((goal[0] - ni)**2 + (goal[1] - nj)**2)
+                            heuristica = 0.7 * h_euclidiana + 0.3 * h_manhattan
+                            
+                            priority = new_cost + heuristica
+                            heapq.heappush(heap, (priority, neighbor))
+                            came_from[neighbor] = current 
+        
+        if goal not in came_from:
+            return [] 
+        
+        path = []
+        node = goal
+        while node is not None:
+            path.append(node)
+            node = came_from.get(node)
+        path.reverse() 
+        
+        return path
+    
+
+    
+
+    
+
+    
       
 
         
