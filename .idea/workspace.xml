@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="imports">
+    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="Simulador de un juego de persecucion y mapa">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/envs/persecucion_env.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/envs/persecucion_env.py" afterDir="false" />
     </list>
@@ -369,7 +369,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748403827135</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Simulador de un juego de persecucion y mapa">
+      <option name="closed" value="true" />
+      <created>1748404571164</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1748404571164</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -384,7 +392,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="dibuja el jugador con un diseño futurista inlcuyendo su escudo y un nucleo hexagonal." />
     <MESSAGE value="Dibuja al enemigo con un diseño amenazante, similar a un diamante con un nucleo rotatorio" />
     <MESSAGE value="mover, mueve el agente y gestiona las colisiones con obstaculos y otros agentes. tambien actualiza los egectos visuales" />
     <MESSAGE value="se define una nueva clase enemigo que hereda de agente." />
@@ -409,6 +416,7 @@
     <MESSAGE value="Dibuja el proyectil en la superficie de pygame." />
     <MESSAGE value="verifica si el proyectil ha colisionado con un agente dado." />
     <MESSAGE value="imports" />
-    <option name="LAST_COMMIT_MESSAGE" value="imports" />
+    <MESSAGE value="Simulador de un juego de persecucion y mapa" />
+    <option name="LAST_COMMIT_MESSAGE" value="Simulador de un juego de persecucion y mapa" />
   </component>
 </project>
