@@ -47,3 +47,83 @@ def pantalla_bienvenida(pantalla, ancho, alto):
 
         pygame.display.flip()
         clock.tick(60)
+
+def pantalla_game_over(pantalla, ancho, alto, victoria=False, puntos=0):
+
+    pygame.font.init()
+    clock = pygame.time.Clock()
+
+    title_font = pygame.font.Font(None, 72)
+    message_font = pygame.font.Font(None, 36)
+    score_font = pygame.font.Font(None, 40)
+    button_font = pygame.font.Font(None, 32)
+    instr_font = pygame.font.Font(None, 24)
+
+    if victoria:
+        titulo_text = title_font.render("¡VICTORIA!", True, (0, 255, 0))
+        mensaje = "Todos los enemigos eliminados"
+    else:
+        titulo_text = title_font.render("GAME OVER", True, (255, 0, 0))
+        mensaje = "Has sido derrotado"
+
+    mensaje_text = message_font.render(mensaje, True, (255, 255, 255))
+    puntos_text = score_font.render(f"PUNTOS: {puntos}", True, (255, 255, 0))
+    button_text = button_font.render("Salir", True, (255, 255, 255))
+    instr_text = instr_font.render("Presiona ESC o haz clic para salir", True, (180, 180, 180))
+
+    spacing = 40
+    current_y = alto // 3
+
+    titulo_rect = titulo_text.get_rect(center=(ancho // 2, current_y))
+    current_y += spacing
+    mensaje_rect = mensaje_text.get_rect(center=(ancho // 2, current_y))
+    current_y += spacing
+    puntos_rect = puntos_text.get_rect(center=(ancho // 2, current_y))
+    current_y += spacing + 10
+
+    padding_x = 100
+    padding_y = 12
+
+    button_text_rect = button_text.get_rect()
+    button_bg_rect = pygame.Rect(0, 0, button_text_rect.width + 2 * padding_x, button_text_rect.height + 2 * padding_y)
+    button_bg_rect.center = (ancho // 2, current_y)
+
+    button_rect = button_text.get_rect(center=button_bg_rect.center)
+    instr_rect = instr_text.get_rect(center=(ancho // 2, alto - 50))
+
+    button_color = (180, 30, 30)
+    button_hover_color = (230, 50, 50)
+
+    running = True
+    while running:
+        pantalla.fill((10, 10, 30))
+
+        for evento in pygame.event.get():
+            if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
+                if button_bg_rect.collidepoint(pygame.mouse.get_pos()):
+                    pygame.quit()
+                    sys.exit()
+
+            if evento.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+            elif evento.type == pygame.KEYDOWN:
+                if evento.key == pygame.K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
+
+        mouse_pos = pygame.mouse.get_pos()
+        hover = button_bg_rect.collidepoint(mouse_pos)
+        color_actual = button_hover_color if hover else button_color
+
+        pantalla.blit(titulo_text, titulo_rect)
+        pantalla.blit(mensaje_text, mensaje_rect)
+        pantalla.blit(puntos_text, puntos_rect)
+
+        pygame.draw.rect(pantalla, color_actual, button_bg_rect, border_radius=8)
+        pantalla.blit(button_text, button_rect)
+        pantalla.blit(instr_text, instr_rect)
+
+        pygame.display.flip()
+        clock.tick(60)
