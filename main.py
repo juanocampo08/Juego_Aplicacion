@@ -39,3 +39,14 @@ def main(modo = "jugar", modo_ia = "hibrido", modelo_path = "src/ml_model/best_m
         print(f"Error durante la ejecución: {e}")
         return
     return
+
+if __name__ == "__main__":
+    """
+        Configuración disponible:
+        - MODO: "entrenar" para entrenar el modelo, "jugar" para ejecutar el juego
+        - MODO_IA: Tipo de inteligencia artificial del enemigo
+        - MODELO_PATH: Ruta donde se guardará el modelo entrenado
+        - VELOCIDAD_JUEGO: FPS del juego (mayor velocidad = entrenamiento más rápido)
+        - TIMESTEPS: Número de pasos de entrenamiento (solo para modo entrenar)
+    """
+    main(modo="jugar", modo_ia="hibrido", modelo_path="src/ml_model/best_model", velocidad_juego=240, timesteps=300000)
