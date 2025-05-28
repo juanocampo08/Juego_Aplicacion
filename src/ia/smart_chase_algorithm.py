@@ -142,6 +142,19 @@ class AlgoritmoPersecucionInteligente:
       if mejor_ruta['path'] and len(mejor_ruta['path']) > 1:
             return self._path_a_accion(mejor_ruta['path'], self._pos_a_grid(enemigo.x, enemigo.y))
       return 8
+
+    def _inicializar_poblacion_genetica(self, enemigo, jugador, tamaño_poblacion=20):
+      self.poblacion_rutas = []
+      start = self._pos_a_grid(enemigo.x, enemigo.y)
+      goal = self._pos_a_grid(jugador.x, jugador.y)
+      
+      for _ in range(tamaño_poblacion):
+            # Se genera una ruta aleatoria con un sesgo hacia el objetivo para empezar.
+            ruta = self._generar_ruta_aleatoria(start, goal)
+            self.poblacion_rutas.append({
+                'path': ruta,
+                'fitness': 0 # El fitness se calculará posteriormente.
+            })
       
 
         
