@@ -646,3 +646,7 @@ class PersecucionPygameEnv(gym.Env):
             print(f"Modo IA cambiado a: {nuevo_modo}")
         else:
             print(f"Modo no válido. Opciones: {modos_validos}")
+
+    def render(self):
+        return self._render_frame()
+
