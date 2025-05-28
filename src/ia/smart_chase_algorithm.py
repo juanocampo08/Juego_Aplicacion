@@ -1,3 +1,10 @@
+import heapq
+import pygame
+import random
+from collections import deque
+import math
+
+
 class AlgoritmoPersecucionInteligente:
   def __init__(self, ancho_mapa, alto_mapa, cell_size=15):
         self.ancho_mapa = ancho_mapa
@@ -23,8 +30,7 @@ class AlgoritmoPersecucionInteligente:
             return self._a_star_predictivo(enemigo, jugador, obstaculos)
 
     def _algoritmo_hibrido(self, enemigo, jugador, obstaculos):
-      self._actualizar_historial_jugador(jugador) # Actualiza el historial de posiciones del jugador para la predicción.
-
+      self._actualizar_historial_jugador(jugador)
       dx = jugador.x - enemigo.x
       dy = jugador.y - enemigo.y
       distancia = math.hypot(dx, dy)

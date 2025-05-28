@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="verifica si el proyectil ha colisionado con un agente dado." />
+    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="Solucion de conflictos">
+      <change beforePath="$PROJECT_DIR$/src/ia/smart_chase_algorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ia/smart_chase_algorithm.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -340,11 +342,18 @@
       <option name="project" value="LOCAL" />
       <updated>1748399905537</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Solucion de conflictos">
+      <option name="closed" value="true" />
+      <created>1748455153076</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1748455153076</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="metodo que dibuja el agente como un circulo" />
     <MESSAGE value="dibuja el jugador con un diseño futurista inlcuyendo su escudo y un nucleo hexagonal." />
     <MESSAGE value="Dibuja al enemigo con un diseño amenazante, similar a un diamante con un nucleo rotatorio" />
     <MESSAGE value="mover, mueve el agente y gestiona las colisiones con obstaculos y otros agentes. tambien actualiza los egectos visuales" />
@@ -369,6 +378,7 @@
     <MESSAGE value="actualiza la posicion del proyectil, sus efectos y verifica colisiones." />
     <MESSAGE value="Dibuja el proyectil en la superficie de pygame." />
     <MESSAGE value="verifica si el proyectil ha colisionado con un agente dado." />
-    <option name="LAST_COMMIT_MESSAGE" value="verifica si el proyectil ha colisionado con un agente dado." />
+    <MESSAGE value="Solucion de conflictos" />
+    <option name="LAST_COMMIT_MESSAGE" value="Solucion de conflictos" />
   </component>
 </project>
