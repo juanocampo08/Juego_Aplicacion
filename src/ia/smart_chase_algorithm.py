@@ -383,6 +383,28 @@ class AlgoritmoPersecucionInteligente:
         except ValueError:
             return 8
 
+    def _path_a_accion(self, path, start):
+      if not path or len(path) < 2:
+            return 8 
+        
+        next_pos = path[1]
+        
+        di = next_pos[0] - start[0]
+        dj = next_pos[1] - start[1]
+        
+        di = max(-1, min(1, di))
+        dj = max(-1, min(1, dj))
+        
+        movimientos = [
+            (0, -1), (1, -1), (1, 0), (1, 1),
+            (0, 1), (-1, 1), (-1, 0), (-1, -1), (0, 0)
+        ]
+        
+        try:
+            return movimientos.index((dj, di))
+        except ValueError:
+            return 8
+
     
 
     
