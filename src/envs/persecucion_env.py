@@ -405,3 +405,252 @@ class PersecucionPygameEnv(gym.Env):
                 generador_mapa.actualizar_mapa_async(self.ancho_pantalla, self.alto_pantalla, set_mapa)
             return observation, recompensa, terminado, truncado, info
 
+    def _calcular_recompensa_mejorada(self, accion):
+        distancia_actual = min(
+            math.hypot(e.x - self.jugador.x, e.y - self.jugador.y) for e in self.enemigos if e.esta_vivo)
+        recompensa = 0
+
+        if distancia_actual < (
+                self.enemigos[0].radio + self.jugador.radio):  # Asume que todos los enemigos tienen el mismo radio
+            recompensa += 300
+
+        if hasattr(self, 'distancia_anterior') and self.distancia_anterior is not None:
+            diferencia_distancia = self.distancia_anterior - distancia_actual  # Recompensa por la reducción de distancia
+            # Un factor de distancia que aumenta la recompensa cuando la distancia es menor,
+            # lo que fomenta que el enemigo se acerque aún más una vez cerca.
+            factor_distancia = 1.0 + (200 - min(distancia_actual, 200)) / 200
+            recompensa += diferencia_distancia * factor_distancia * 3.0
+
+        recompensa -= 0.01
+
+        rect_enemigo = pygame.Rect(
+            int(self.enemigos[0].x - self.enemigos[0].radio),  # Asume que solo se considera el primer enemigo
+            int(self.enemigos[0].y - self.enemigos[0].radio),
+            self.enemigos[0].radio * 2, self.enemigos[0].radio * 2
+        )
+        colision = False
+        for obstaculo in self.obstaculos:
+            if rect_enemigo.colliderect(obstaculo.rect):
+                recompensa -= 5
+                colision = True
+                break
+        if not colision:
+            recompensa += 0.5
+
+        if accion == 8:
+            recompensa -= 1.0
+
+        if distancia_actual < 50:
+            recompensa += (50 - distancia_actual) * 0.15
+
+        if hasattr(self, 'accion_anterior'):
+            if accion != self.accion_anterior and accion != 8:
+                recompensa -= 0.2
+        self.accion_anterior = accion
+
+        self.distancia_anterior = distancia_actual
+        return recompensa
+
+    def _render_frame(self):
+        if self.pantalla is None:
+            pygame.init()
+            pygame.display.init()
+            self.pantalla = pygame.display.set_mode((self.ancho_pantalla, self.alto_pantalla))
+            pygame.display.set_caption("🚀 CYBER PURSUIT")
+
+            if not self.modo_entrenamiento:
+                pantalla_bienvenida(self.pantalla, self.ancho_pantalla, self.alto_pantalla)
+            self.font = pygame.font.Font(None, 28)
+            self.title_font = pygame.font.Font(None, 36)
+        if self.clock is None:
+            self.clock = pygame.time.Clock()
+
+        for y in range(self.alto_pantalla):
+            base_intensity = 10 + (y / self.alto_pantalla) * 20
+            blue_component = int(base_intensity + 10 * math.sin(y * 0.01))
+            purple_component = int(base_intensity * 0.7)
+            color = (int(base_intensity * 0.3), purple_component, blue_component)
+            pygame.draw.line(self.pantalla, color, (0, y), (self.ancho_pantalla, y))
+
+        grid_intensity = int(40 + 20 * (math.sin(pygame.time.get_ticks() * 0.001) + 1) / 2)
+        grid_color = (grid_intensity, grid_intensity, grid_intensity + 20)
+
+        for x in range(0, self.ancho_pantalla, 50):
+            pygame.draw.line(self.pantalla, grid_color, (x, 0), (x, self.alto_pantalla), 1)
+        for y in range(0, self.alto_pantalla, 50):
+            pygame.draw.line(self.pantalla, grid_color, (0, y), (self.ancho_pantalla, y), 1)
+
+        for obstaculo in self.obstaculos:
+            if hasattr(obstaculo, 'update'):
+                obstaculo.update()
+            obstaculo.dibujar(self.pantalla)
+
+        if len(self.enemigos) > 1:
+            for i, enemigo1 in enumerate(self.enemigos):
+                if not enemigo1.esta_vivo:
+                    continue
+                for enemigo2 in self.enemigos[i + 1:]:
+                    if not enemigo2.esta_vivo:
+                        continue
+                    dist = math.hypot(enemigo1.x - enemigo2.x, enemigo1.y - enemigo2.y)
+                    if dist < 150:
+                        alpha = int(50 * (1 - dist / 150))
+                        VisualEffects.draw_particle_trail(
+                            self.pantalla,
+                            (enemigo1.x, enemigo1.y),
+                            (enemigo2.x, enemigo2.y),
+                            (255, 100, 100),
+                            particles=6
+                        )
+
+        self.jugador.x = max(0, min(self.jugador.x, self.ancho_pantalla))
+        self.jugador.y = max(0, min(self.jugador.y, self.alto_pantalla))
+        self.jugador.dibujar(self.pantalla)
+
+        for enemigo in self.enemigos:
+            if not enemigo.esta_vivo:
+                continue
+            enemigo.x = max(0, min(enemigo.x, self.ancho_pantalla))
+            enemigo.y = max(0, min(enemigo.y, self.alto_pantalla))
+            enemigo.dibujar(self.pantalla)
+
+        if self.enemigos:
+            enemigos_ordenados = sorted(
+                self.enemigos,
+                key=lambda e: math.hypot(e.x - self.jugador.x, e.y - self.jugador.y)
+            )
+
+            closest_enemy = next((e for e in enemigos_ordenados if e.esta_vivo), None)
+
+            if closest_enemy:
+                vision_surface = pygame.Surface((160, 160), pygame.SRCALPHA)  # Superficie semitransparente
+                pygame.draw.circle(vision_surface, (255, 0, 0, 20), (80, 80), 80)  # Círculo interior
+                pygame.draw.circle(vision_surface, (255, 100, 100, 40), (80, 80), 80, 2)  # Borde del círculo
+                self.pantalla.blit(vision_surface,
+                                   (closest_enemy.x - 80, closest_enemy.y - 80))  # Dibujar en la posición del enemigo
+
+        if not self.modo_entrenamiento:
+            self._draw_futuristic_hud()
+
+        if not self.modo_entrenamiento:
+            self.jugador.dibujar_proyectiles(self.pantalla)
+
+        for powerup in self.powerups_salud:
+            powerup.dibujar(self.pantalla)
+
+        pygame.display.flip()
+        if not self.modo_entrenamiento and self.juego_terminado:
+            pantalla_game_over(self.pantalla, self.ancho_pantalla,
+                               self.alto_pantalla, self.victoria, self.puntos)
+
+        self.clock.tick(self.velocidad_juego if not self.modo_entrenamiento else 0)
+
+    def _draw_futuristic_hud(self):
+        vida_porcentaje = self.jugador.vida_actual / self.jugador.vida_maxima if self.jugador.esta_vivo else 0
+        vida_bar_width = 180
+        vida_bar_height = 11
+        padding = 15
+        vida_x = padding
+        vida_y = self.alto_pantalla - vida_bar_height - padding
+
+        vida_bg = pygame.Rect(vida_x, vida_y, vida_bar_width, vida_bar_height)
+        pygame.draw.rect(self.pantalla, (50, 50, 50), vida_bg)
+
+        vida_fill_width = int(vida_bar_width * vida_porcentaje)
+        color_vida = (0, 255, 0) if vida_porcentaje > 0.6 else (255, 255, 0) if vida_porcentaje > 0.3 else (255, 0, 0)
+        pygame.draw.rect(self.pantalla, color_vida, (vida_x, vida_y, vida_fill_width, vida_bar_height))
+        pygame.draw.rect(self.pantalla, (150, 150, 150), vida_bg, 2)
+
+        puntos_text = f"PUNTOS: {self.puntos}"
+        puntos_surface = pygame.font.Font(None, 28).render(puntos_text, True, (255, 255, 0))
+        self.pantalla.blit(puntos_surface, (15, 15))
+
+        enemigos_vivos = sum(1 for e in self.enemigos if e.esta_vivo)
+        enemigos_text = f"ENEMIGOS: {enemigos_vivos}"
+        enemigos_surface = pygame.font.Font(None, 28).render(enemigos_text, True, (255, 100, 100))
+        self.pantalla.blit(enemigos_surface, (15, 45))
+
+        if hasattr(self.jugador, 'boost_energy'):
+            bar_width = 120
+            bar_height = 12
+            padding = 15
+            x_pos = self.ancho_pantalla - bar_width - padding
+            y_pos = self.alto_pantalla - bar_height - padding
+
+            energy_rect = pygame.Rect(x_pos, y_pos, bar_width, bar_height)
+            pygame.draw.rect(self.pantalla, (40, 40, 40), energy_rect)
+            fill_width = int(bar_width * max(0, min(self.jugador.boost_energy, 100)) / 100)
+            energy_fill = pygame.Rect(x_pos, y_pos, fill_width, bar_height)
+            # Cambia el color de la barra de energía según el nivel de energía.
+            energy_color = (0, 255, 255) if self.jugador.boost_energy > 50 else (255, 255, 0)
+            pygame.draw.rect(self.pantalla, energy_color, energy_fill)
+            pygame.draw.rect(self.pantalla, (100, 100, 100), energy_rect, 2)
+
+        minimap_size = 140
+        minimap_rect = pygame.Rect(self.ancho_pantalla - minimap_size - 15, 15, minimap_size, minimap_size)
+        minimap_surface = pygame.Surface((minimap_size, minimap_size), pygame.SRCALPHA)
+        player_x = max(0, min(self.jugador.x, self.ancho_pantalla))
+        player_y = max(0, min(self.jugador.y, self.alto_pantalla))
+        scale_x = minimap_size / self.ancho_pantalla
+        scale_y = minimap_size / self.alto_pantalla
+
+        player_minimap_x = int(player_x * scale_x)
+        player_minimap_y = int(player_y * scale_y)
+
+        if (player_minimap_x >= 0 and player_minimap_x <= minimap_size and
+                player_minimap_y >= 0 and player_minimap_y <= minimap_size):
+            bg_opacity = 80
+        else:
+            bg_opacity = 150
+
+        pygame.draw.rect(minimap_surface, (0, 0, 0, bg_opacity), (0, 0, minimap_size, minimap_size))
+        VisualEffects.draw_tech_border(minimap_surface, pygame.Rect(0, 0, minimap_size, minimap_size), (0, 255, 0), 1)
+
+        if hasattr(self, 'obstaculos'):
+            for obstaculo in self.obstaculos:
+                # Asegura que las coordenadas del obstáculo estén dentro del rango del mapa.
+                ox = max(0, min(obstaculo.x, self.ancho_pantalla))
+                oy = max(0, min(obstaculo.y, self.alto_pantalla))
+                ow = max(1, int(obstaculo.ancho * scale_x))
+                oh = max(1, int(obstaculo.alto * scale_y))
+                obs_x = int(ox * scale_x)
+                obs_y = int(oy * scale_y)
+                pygame.draw.rect(minimap_surface, (180, 180, 180), (obs_x, obs_y, ow, oh))
+
+        pygame.draw.circle(minimap_surface, (0, 150, 255), (player_minimap_x, player_minimap_y), 4)
+
+        for enemigo in self.enemigos:
+            if not enemigo.esta_vivo:
+                continue
+            ex = max(0, min(enemigo.x, self.ancho_pantalla))
+            ey = max(0, min(enemigo.y, self.alto_pantalla))
+            enemy_x = int(ex * scale_x)
+            enemy_y = int(ey * scale_y)
+            pygame.draw.circle(minimap_surface, (255, 0, 0), (enemy_x, enemy_y), 3)
+
+        for powerup in self.powerups_salud:
+            if not powerup.activo:
+                continue
+            px = int(powerup.x * scale_x)
+            py = int(powerup.y * scale_y)
+            pygame.draw.circle(minimap_surface, (0, 255, 100), (px, py), 3)
+
+        self.pantalla.blit(minimap_surface, minimap_rect.topleft)
+        minimap_label = pygame.font.Font(None, 20).render("RADAR", True, (0, 255, 0))
+        self.pantalla.blit(minimap_label, (self.ancho_pantalla - 65, minimap_rect.bottom + 5))
+
+    def cambiar_modo_ia(self, nuevo_modo):
+        modos_validos = ["hibrido", "predictivo", "campo_potencial", "genetico"]
+        if nuevo_modo in modos_validos:
+            self.modo_ia = nuevo_modo
+            print(f"Modo IA cambiado a: {nuevo_modo}")
+        else:
+            print(f"Modo no válido. Opciones: {modos_validos}")
+
+    def render(self):
+        return self._render_frame()
+
+    def close(self):
+        if self.pantalla is not None:
+            pygame.display.quit()
+            pygame.quit()
