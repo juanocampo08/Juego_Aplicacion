@@ -68,3 +68,9 @@ class Proyectil:
         VisualEffects.draw_glow_circle(superficie, (0, 255, 255), center, self.radio, glow_radius)
         pygame.draw.circle(superficie, (255, 255, 255), center, 1)
 
+    def colisiona_con(self, agente):
+        if not self.activo:
+            return False
+
+        distancia = math.hypot(self.x - agente.x, self.y - agente.y)
+        return distancia < (self.radio + agente.radio)
