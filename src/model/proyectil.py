@@ -47,6 +47,24 @@ class Proyectil:
         self.trail_positions.insert(0, (self.x, self.y))
 
         if (self.x < 0 or self.x > ancho_pantalla or
-                self.y < 0 or self.y > alto_pantalla):
+            self.y < 0 or self.y > alto_pantalla):
             self.activo = False
+
+    def dibujar(self, superficie):
+        if not self.activo:
+            return
+
+        for i, pos in enumerate(self.trail_positions[1:]):
+            alpha = int(150 * (1 - i / len(self.trail_positions)))
+            trail_surface = pygame.Surface((6, 6), pygame.SRCALPHA)
+            trail_color = (0, 255, 255, alpha)
+            pygame.draw.circle(trail_surface, trail_color, (3, 3), max(1, 3 - i))
+            superficie.blit(trail_surface, (int(pos[0] - 3), int(pos[1] - 3)))
+
+        center = (int(self.x), int(self.y))
+        pulse_intensity = (math.sin(self.pulse_phase) + 1) / 2
+        glow_radius = int(3 + pulse_intensity * 4)
+
+        VisualEffects.draw_glow_circle(superficie, (0, 255, 255), center, self.radio, glow_radius)
+        pygame.draw.circle(superficie, (255, 255, 255), center, 1)
 
