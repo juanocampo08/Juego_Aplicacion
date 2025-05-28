@@ -155,6 +155,30 @@ class AlgoritmoPersecucionInteligente:
                 'path': ruta,
                 'fitness': 0 # El fitness se calculará posteriormente.
             })
+
+    def _generar_ruta_aleatoria(self, start, goal, max_pasos=15):
+      ruta = [start]
+        pos_actual = start
+        
+        for _ in range(max_pasos):
+            if pos_actual == goal:
+                break
+              
+            if random.random() < 0.7:
+                dx = 1 if goal[1] > pos_actual[1] else (-1 if goal[1] < pos_actual[1] else 0)
+                dy = 1 if goal[0] > pos_actual[0] else (-1 if goal[0] < pos_actual[0] else 0)
+            else:
+                dx = random.choice([-1, 0, 1])
+                dy = random.choice([-1, 0, 1])
+            
+            nueva_pos = (pos_actual[0] + dy, pos_actual[1] + dx)
+            
+            if (0 <= nueva_pos[0] < self.rows and 
+                0 <= nueva_pos[1] < self.cols):
+                ruta.append(nueva_pos)
+                pos_actual = nueva_pos
+        
+        return ruta
       
 
         
