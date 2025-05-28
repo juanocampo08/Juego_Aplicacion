@@ -23,3 +23,16 @@ class VisualEffects:
         pygame.draw.circle(glow_surface, color, (glow_radius, glow_radius), radius)
 
         surface.blit(glow_surface, (center[0] - glow_radius, center[1] - glow_radius))
+
+    @staticmethod
+    def draw_hexagon(surface, color, center, radius):
+
+        points = []
+        for i in range(6):
+            angle_rad = math.pi / 3 * i - math.pi / 6
+            x = center[0] + radius * math.cos(angle_rad)
+            y = center[1] + radius * math.sin(angle_rad)
+            points.append((int(x), int(y)))
+
+        pygame.draw.polygon(surface, color, points)
+        return points
