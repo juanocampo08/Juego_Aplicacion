@@ -252,3 +252,145 @@ class PersecucionPygameEnv(gym.Env):
         if self.render_mode == "human":
             self._render_frame()
         return observation, info
+
+    def step(self, action):
+        if self.juego_terminado:
+            return self._get_obs(), 0, True, False, self._get_info()
+
+        self.pasos += 1
+
+        if not self.modo_entrenamiento:
+            self.jugador.actualizar_proyectiles(self.ancho_pantalla, self.alto_pantalla, self.obstaculos)
+
+            for proyectil in self.jugador.proyectiles[:]:
+                for enemigo in self.enemigos[:]:
+                    if not enemigo.esta_vivo:
+                        continue
+                    if proyectil.colisiona_con(enemigo):
+                        proyectil.activo = False
+                        if proyectil in self.jugador.proyectiles:
+                            self.jugador.proyectiles.remove(proyectil)
+
+                        murio = enemigo.recibir_dano(20)
+                        if murio:
+                            enemigo.esta_vivo = False
+                            self.puntos += 100
+                        else:
+                            self.puntos += 10
+                        break
+
+        acciones_enemigos = []
+        enemigos_vivos = [e for e in self.enemigos if e.esta_vivo]
+
+        if self.usar_ia_inteligente:
+            for enemigo in enemigos_vivos:
+                try:
+                    accion_ia = calcular_accion_inteligente(
+                        enemigo, self.jugador, self.obstaculos,
+                        self.algoritmo_ia, self.modo_ia
+                    )
+                except Exception as e:
+                    print(f"Error en IA inteligente: {e}")
+                    accion_ia = action
+                acciones_enemigos.append(accion_ia)
+        else:
+            acciones_enemigos = [action] * len(enemigos_vivos)
+        movimientos_enemigo = [
+            (0, -1), (1, -1), (1, 0), (1, 1),
+            (0, 1), (-1, 1), (-1, 0), (-1, -1), (0, 0)
+        ]
+
+        for idx, enemigo in enumerate(enemigos_vivos):
+            if idx < len(acciones_enemigos):
+                act = acciones_enemigos[idx]
+                dx, dy = movimientos_enemigo[act]
+                enemigo.mover(dx, dy, self.obstaculos, enemigos_vivos)
+
+
+        if self.modo_entrenamiento:
+            terminado = False
+            recompensa = 0
+
+            for enemigo in enemigos_vivos:
+                distancia = math.hypot(enemigo.x - self.jugador.x, enemigo.y - self.jugador.y)
+                if distancia < (enemigo.radio + self.jugador.radio):
+                    terminado = True
+                    self.capturas += 1
+                    self.tiempo_captura_promedio.append(self.pasos)
+                    recompensa += 300  # Gran recompensa por captura
+                    break
+
+            if not terminado:
+                min_dist = min(math.hypot(e.x - self.jugador.x, e.y - self.jugador.y)
+                               for e in enemigos_vivos) if enemigos_vivos else float('inf')
+
+                if self.distancia_anterior is not None and enemigos_vivos:
+                    dif_dist = self.distancia_anterior - min_dist
+                    factor_dist = 1.0 + (200 - min(min_dist, 200)) / 200
+                    recompensa += dif_dist * factor_dist * 3.0
+
+                recompensa -= 0.01
+                self.distancia_anterior = min_dist
+
+            truncado = self.pasos >= self.max_pasos
+
+        else:
+            self.jugador.manejar_input(self.obstaculos)
+
+            for enemigo in enemigos_vivos:
+                distancia = math.hypot(enemigo.x - self.jugador.x, enemigo.y - self.jugador.y)
+                if distancia < (enemigo.radio + self.jugador.radio):
+                    murio_jugador = self.jugador.recibir_dano(enemigo.dano_contacto)
+                    if murio_jugador:
+                        if self.puntos >= 50:
+                            self.puntos -= 10
+                        self.juego_terminado = True
+                        self.victoria = False
+                        break
+                    elif murio_jugador == False:
+                        if self.puntos >= 50:
+                            self.puntos -= 10
+
+            if not enemigos_vivos and not self.juego_terminado:
+                self.juego_terminado = True
+                self.victoria = True
+                self.puntos += 500
+            terminado = self.juego_terminado
+            recompensa = 0
+            truncado = False
+
+        observation = self._get_obs()
+        info = self._get_info()
+
+        if self.render_mode == "human":
+            self._render_frame()
+
+        if time.time() - self.tiempo_ultimo_powerup > self.INTERVALO_POWERUP and not self.modo_entrenamiento:
+            for _ in range(5):
+                x = random.randint(30, self.ancho_pantalla - 30)
+                y = random.randint(30, self.alto_pantalla - 30)
+                nuevo = PowerUpSalud(x, y)
+                self.INTERVALO_POWERUP = random.randint(7, 12)
+
+                if any(nuevo.rect().colliderect(obs.rect) for obs in self.obstaculos):
+                    continue
+
+                self.powerups_salud.append(nuevo)
+                self.tiempo_ultimo_powerup = time.time()
+                break
+
+        self.powerups_salud = [p for p in self.powerups_salud if p.activo]
+
+        for powerup in self.powerups_salud[:]:
+            if self.jugador.vida_actual >= self.jugador.vida_maxima:
+                break
+            powerup.actualizar()
+
+            distancia = math.hypot(powerup.x - self.jugador.x, powerup.y - self.jugador.y)
+            if distancia < (self.jugador.radio + powerup.radio):
+                self.jugador.vida_actual = min(self.jugador.vida_maxima, self.jugador.vida_actual + 15)
+                self.powerups_salud.remove(powerup)
+
+        if time.time() - self.tiempo_ultimo_mapa[0] > self.INTERVALO_MAPA and not hasattr(self,"actualizando_mapa") and not self.modo_entrenamiento:
+            self.actualizando_mapa = True
+
