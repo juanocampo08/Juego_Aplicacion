@@ -161,6 +161,65 @@ class AlgoritmoPersecucionInteligente:
                 'path': ruta,
                 'fitness': 0 # El fitness se calculará posteriormente.
             })
+
+    def _generar_ruta_aleatoria(self, start, goal, max_pasos=15):
+      ruta = [start]
+        pos_actual = start
+        
+        for _ in range(max_pasos):
+            if pos_actual == goal:
+                break
+              
+            if random.random() < 0.7:
+                dx = 1 if goal[1] > pos_actual[1] else (-1 if goal[1] < pos_actual[1] else 0)
+                dy = 1 if goal[0] > pos_actual[0] else (-1 if goal[0] < pos_actual[0] else 0)
+            else:
+                dx = random.choice([-1, 0, 1])
+                dy = random.choice([-1, 0, 1])
+            
+            nueva_pos = (pos_actual[0] + dy, pos_actual[1] + dx)
+            
+            if (0 <= nueva_pos[0] < self.rows and 
+                0 <= nueva_pos[1] < self.cols):
+                ruta.append(nueva_pos)
+                pos_actual = nueva_pos
+        
+        return ruta
+
+    def _evaluar_poblacion(self, enemigo, jugador, obstaculos):
+      grid = self._crear_grid_mejorado(obstaculos)
+        
+        for individuo in self.poblacion_rutas:
+            ruta = individuo['path']
+            fitness = 0
+            
+            if not ruta:
+                individuo['fitness'] = -1000
+                continue
+            
+            fitness -= len(ruta) * 2
+            
+            if ruta:
+                pos_final = ruta[-1]
+                pos_final_real = self._grid_a_pos(pos_final[0], pos_final[1])
+                dist_final = math.sqrt((pos_final_real[0] - jugador.x)**2 + 
+                                     (pos_final_real[1] - jugador.y)**2)
+                fitness += max(0, 200 - dist_final)
+            
+            for pos in ruta:
+                if (0 <= pos[0] < self.rows and 0 <= pos[1] < self.cols and
+                    grid[pos[0]][pos[1]] == 1):
+                    fitness -= 50
+            
+            if len(ruta) > 2:
+                cambios_direccion = 0
+                for i in range(2, len(ruta)):
+                    dir1 = (ruta[i-1][0] - ruta[i-2][0], ruta[i-1][1] - ruta[i-2][1])
+                    dir2 = (ruta[i][0] - ruta[i-1][0], ruta[i][1] - ruta[i-1][1])
+                    if dir1 != dir2:
+                        cambios_direccion += 1
+                fitness -= cambios_direccion * 5 
+            individuo['fitness'] = fitness
       
 
         
