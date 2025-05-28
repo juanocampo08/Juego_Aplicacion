@@ -340,6 +340,12 @@ class AlgoritmoPersecucionInteligente:
         path.reverse() 
         
         return path
+
+    def _actualizar_historial_jugador(self, jugador):
+      self.historial_jugador.append((jugador.x, jugador.y))
+
+    def _pos_a_grid(self, x, y):
+      return int(y // self.cell_size), int(x // self.cell_size)
     
 
     
