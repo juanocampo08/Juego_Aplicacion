@@ -228,9 +228,20 @@ class Enemigo(Agente):
         self.alert_level = 0
 
         self.dano_contacto = 15
+
     def update_ai_effects(self):
         self.scan_angle += 5
 
+class Jugador(Agente):
+    def __init__(self, x, y):
+        super().__init__(x, y, (50, 100, 255), radio=10, velocidad=5, agent_type="player", vida_maxima=100)
+        self.boost_energy = 100
+        self.shield_active = False
+        self.boost_locked = False
+
+        self.proyectiles = []
+        self.tiempo_ultimo_disparo = 0
+        self.cadencia_disparo = 200
 
 
 
