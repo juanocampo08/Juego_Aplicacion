@@ -58,6 +58,34 @@ class AlgoritmoPersecucionInteligente:
                     return True
         return False
 
+    def _predecir_posicion_jugador(self):
+      if len(self.historial_jugador) < 3:
+            return self.historial_jugador[-1] if self.historial_jugador else (0, 0)
+        
+        velocidades = []
+        for i in range(1, len(self.historial_jugador)):
+            prev_pos = self.historial_jugador[i-1]
+            curr_pos = self.historial_jugador[i]
+            vx = curr_pos[0] - prev_pos[0]
+            vy = curr_pos[1] - prev_pos[1]
+            velocidades.append((vx, vy))
+          
+        sum_weights = sum(range(1, len(velocidades)+1))
+        vx_pred = sum(vx * (i+1) for i, (vx, vy) in enumerate(velocidades)) / sum_weights
+        vy_pred = sum(vy * (i+1) for i, (vx, vy) in enumerate(velocidades)) / sum_weights
+        
+        pos_actual = self.historial_jugador[-1]
+        predicciones = []
+
+        for t in range(1, 6):  
+            pred_x = pos_actual[0] + vx_pred * t
+            pred_y = pos_actual[1] + vy_pred * t
+            pred_x = max(0, min(pred_x, self.ancho_mapa))
+            pred_y = max(0, min(pred_y, self.alto_mapa))
+            predicciones.append((pred_x, pred_y)) 
+
+        return predicciones[2] if len(predicciones) > 2 else predicciones[0]
+
         
       
 
