@@ -151,7 +151,40 @@ class Agente:
             energy_y = center[1] + 6 * math.sin(angle)
             pygame.draw.circle(superficie, (0, 255, 255), (int(energy_x), int(energy_y)), 2)
 
+    def _draw_enemy(self, superficie, center):
+        diamond_size = self.radio
+        diamond_points = [
+            (center[0], center[1] - diamond_size),
+            (center[0] + diamond_size, center[1]),
+            (center[0], center[1] + diamond_size),
+            (center[0] - diamond_size, center[1])
+        ]
 
+        shadow_points = [(p[0] + 2, p[1] + 2) for p in diamond_points]
+        pygame.draw.polygon(superficie, (100, 0, 0), shadow_points)
+
+        pygame.draw.polygon(superficie, self.color, diamond_points)
+        pygame.draw.polygon(superficie, (255, 100, 100), diamond_points, 2)
+
+        inner_points = []
+        for i in range(3):
+            angle = (i * 2 * math.pi / 3) + math.radians(self.shield_rotation * 2)
+            x = center[0] + 5 * math.cos(angle)
+            y = center[1] + 5 * math.sin(angle)
+            inner_points.append((x, y))
+        pygame.draw.polygon(superficie, (255, 0, 0), inner_points)
+
+        for i in range(6):
+            angle = i * math.pi / 3 + self.pulse_phase
+            line_start = (
+                center[0] + 4 * math.cos(angle),
+                center[1] + 4 * math.sin(angle)
+            )
+            line_end = (
+                center[0] + (self.radio - 2) * math.cos(angle),
+                center[1] + (self.radio - 2) * math.sin(angle)
+            )
+            pygame.draw.line(superficie, (255, 50, 50), line_start, line_end, 1)
 
 
 
