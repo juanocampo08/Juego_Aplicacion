@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="este metodo dibuja el obstaculo en la superficie">
-      <change beforePath="$PROJECT_DIR$/src/model/entorno.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entorno.py" afterDir="false" />
+    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="este metodo dibuja el power up en la superficie de pygame, incluyendo un circulo principal y un efecto de brillo.">
+      <change beforePath="$PROJECT_DIR$/src/model/proyectil.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/proyectil.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -238,15 +238,82 @@
       <option name="project" value="LOCAL" />
       <updated>1748397023350</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="este metodo dibuja el obstaculo en la superficie">
+      <option name="closed" value="true" />
+      <created>1748397128444</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1748397128444</updated>
+    </task>
+    <task id="LOCAL-00023" summary="se termina el metodo que dibuja el obstaculo">
+      <option name="closed" value="true" />
+      <created>1748397250242</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1748397250242</updated>
+    </task>
+    <task id="LOCAL-00024" summary="se dibuja el ibstaculo de tipo tecnologico con una base solida">
+      <option name="closed" value="true" />
+      <created>1748397454605</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1748397454605</updated>
+    </task>
+    <task id="LOCAL-00025" summary="se dibuja el ibstaculo de tipo cristal con una forma hexagonal">
+      <option name="closed" value="true" />
+      <created>1748397637771</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1748397637771</updated>
+    </task>
+    <task id="LOCAL-00026" summary="se dibuja el obstaculo de tipo barrera de energia con una base solida">
+      <option name="closed" value="true" />
+      <created>1748397857051</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1748397857051</updated>
+    </task>
+    <task id="LOCAL-00027" summary="se crea la clase powerupsalud, el jugador puede recogerla, tiene una duracion y un efecto.">
+      <option name="closed" value="true" />
+      <created>1748398032762</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1748398032762</updated>
+    </task>
+    <task id="LOCAL-00028" summary="este metodo representa un area de colision.">
+      <option name="closed" value="true" />
+      <created>1748398194828</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1748398194828</updated>
+    </task>
+    <task id="LOCAL-00029" summary="este metodo actualiza el estado power up, verificando su duracion.">
+      <option name="closed" value="true" />
+      <created>1748398369611</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1748398369611</updated>
+    </task>
+    <task id="LOCAL-00030" summary="este metodo dibuja el power up en la superficie de pygame, incluyendo un circulo principal y un efecto de brillo.">
+      <option name="closed" value="true" />
+      <created>1748398577527</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1748398577527</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Creacion de carpetas necesarias para iniciar la implementacion del codigo respectivo." />
-    <MESSAGE value="Ajustes de archivos restantes." />
-    <MESSAGE value="se definen atributos de la clase agente." />
-    <MESSAGE value="se define el metodo de recibir daño de la clase agente" />
-    <MESSAGE value="se define el metodo para actualizar los efectos" />
     <MESSAGE value="se define el meotodo dibujar, este dibuja al agente con la ayuda de pygame con sus efectos futuristas" />
     <MESSAGE value="se define el metodo que dibuja la barra encima del agente , mostrando solo la vida actual siendo esta es diferente de la vida maxima." />
     <MESSAGE value="metodo que calcula color para el nucleo del agente" />
@@ -264,6 +331,14 @@
     <MESSAGE value="se hacen las respectivas importaciones y se crea la clase obstaculofuturista con sus atributos" />
     <MESSAGE value="actualiza el estado interno de los efectos visuales del obstaculo." />
     <MESSAGE value="este metodo dibuja el obstaculo en la superficie" />
-    <option name="LAST_COMMIT_MESSAGE" value="este metodo dibuja el obstaculo en la superficie" />
+    <MESSAGE value="se termina el metodo que dibuja el obstaculo" />
+    <MESSAGE value="se dibuja el ibstaculo de tipo tecnologico con una base solida" />
+    <MESSAGE value="se dibuja el ibstaculo de tipo cristal con una forma hexagonal" />
+    <MESSAGE value="se dibuja el obstaculo de tipo barrera de energia con una base solida" />
+    <MESSAGE value="se crea la clase powerupsalud, el jugador puede recogerla, tiene una duracion y un efecto." />
+    <MESSAGE value="este metodo representa un area de colision." />
+    <MESSAGE value="este metodo actualiza el estado power up, verificando su duracion." />
+    <MESSAGE value="este metodo dibuja el power up en la superficie de pygame, incluyendo un circulo principal y un efecto de brillo." />
+    <option name="LAST_COMMIT_MESSAGE" value="este metodo dibuja el power up en la superficie de pygame, incluyendo un circulo principal y un efecto de brillo." />
   </component>
 </project>
