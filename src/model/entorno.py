@@ -27,3 +27,10 @@ class ObstaculoFuturista:
     def dibujar(self, superficie):
         shadow_rect = pygame.Rect(self.rect.x + 4, self.rect.y + 4, self.rect.width, self.rect.height)
         pygame.draw.rect(superficie, (20, 20, 30), shadow_rect)
+
+        if self.obstacle_type == "tech":
+            self._draw_tech_obstacle(superficie)
+        elif self.obstacle_type == "crystal":
+            self._draw_crystal_obstacle(superficie)
+        else:
+            self._draw_barrier_obstacle(superficie)
