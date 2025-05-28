@@ -346,6 +346,43 @@ class AlgoritmoPersecucionInteligente:
 
     def _pos_a_grid(self, x, y):
       return int(y // self.cell_size), int(x // self.cell_size)
+
+    def _grid_a_pos(self, i, j):
+      return j * self.cell_size + self.cell_size // 2, i * self.cell_size + self.cell_size // 2
+
+    def _fuerza_a_accion(self, fx, fy):
+      magnitud = math.sqrt(fx**2 + fy**2)
+        if magnitud < 0.1:
+            return 8  
+        
+        fx_norm = fx / magnitud
+        fy_norm = fy / magnitud
+        
+        if fx_norm > 0.5:
+            dx = 1
+        elif fx_norm < -0.5:
+            dx = -1
+        else:
+            dx = 0
+            
+        if fy_norm > 0.5:
+            dy = 1
+        elif fy_norm < -0.5:
+            dy = -1
+        else:
+            dy = 0
+        
+        movimientos = [
+            (0, -1), (1, -1), (1, 0), (1, 1),    
+            (0, 1), (-1, 1), (-1, 0), (-1, -1),  
+            (0, 0)                               
+        ]
+        
+        try:
+            return movimientos.index((dx, dy))
+        except ValueError:
+            return 8
+
     
 
     
