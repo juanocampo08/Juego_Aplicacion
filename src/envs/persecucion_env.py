@@ -97,3 +97,16 @@ class PersecucionPygameEnv(gym.Env):
         obs_list.extend([player_x_norm, player_y_norm, prog])
 
         return np.array(obs_list, dtype=np.float32)
+
+    def _get_info(self):
+        distancias = [
+            math.hypot(e.x - self.jugador.x, e.y - self.jugador.y)
+            for e in self.enemigos
+        ]
+        return {
+            "distancias": distancias,
+            "pasos": self.pasos,
+            "capturas": self.capturas,
+            "efectividad_ia": self.efectividad_ia,
+            "modo_ia": self.modo_ia
+        }
