@@ -128,7 +128,20 @@ class AlgoritmoPersecucionInteligente:
       fy_total = fy_atractiva + fy_repulsiva
       return self._fuerza_a_accion(fx_total, fy_total)
 
-    
+    def _algoritmo_genetico(self, enemigo, jugador, obstaculos, generaciones=5):
+      if not self.poblacion_rutas:
+            self._inicializar_poblacion_genetica(enemigo, jugador)
+        
+      for _ in range(generaciones):
+            self._evaluar_poblacion(enemigo, jugador, obstaculos)
+            self._seleccion_y_reproduccion()
+            self._mutacion()
+        
+      mejor_ruta = max(self.poblacion_rutas, key=lambda r: r['fitness'])
+      
+      if mejor_ruta['path'] and len(mejor_ruta['path']) > 1:
+            return self._path_a_accion(mejor_ruta['path'], self._pos_a_grid(enemigo.x, enemigo.y))
+      return 8
       
 
         
