@@ -59,3 +59,60 @@ def entrenar_modelo_mejorado(modelo_path, timesteps=3000000, modo_ia="hibrido", 
     env_vectorizado.close()
     return modelo
 
+
+def jugar_con_modelo_mejorado(modelo_path, modo_ia="hibrido"):
+
+    print("Iniciando modo de juego avanzado...")
+
+    if not os.path.exists(modelo_path + ".zip"):
+        print("Error: No se encontró el modelo entrenado.")
+        print("Ejecuta primero en modo 'entrenar'")
+        return
+
+    env_juego = PersecucionPygameEnv(
+        render_mode="human",
+        modo_entrenamiento=False,
+        modo_ia=modo_ia
+    )
+
+    modelo = DQN.load(modelo_path)
+    print("Modelo cargado correctamente")
+    print("ESC para salir\n")
+
+    obs, info = env_juego.reset()
+    ejecutando = True
+    episodios = 0
+
+    while ejecutando:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                ejecutando = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    ejecutando = False
+                elif event.key == pygame.K_1:
+                    env_juego.cambiar_modo_ia("hibrido")
+                elif event.key == pygame.K_2:
+                    env_juego.cambiar_modo_ia("predictivo")
+                elif event.key == pygame.K_3:
+                    env_juego.cambiar_modo_ia("campo_potencial")
+                elif event.key == pygame.K_4:
+                    env_juego.cambiar_modo_ia("genetico")
+
+        action, _states = modelo.predict(obs, deterministic=True)
+        obs, reward, terminated, truncated, info = env_juego.step(action)
+
+        if terminated:
+            episodios += 1
+            print(
+                f"¡Atrapado! Episodio {episodios} - Pasos: {info['pasos']} - Efectividad IA: {info['efectividad_ia']:.1%}")
+            time.sleep(1.5)
+            obs, info = env_juego.reset()
+        elif truncated:
+            episodios += 1
+            print(f"Escapaste - Episodio {episodios}")
+            obs, info = env_juego.reset()
+
+    env_juego.close()
+    print("¡Gracias por jugar!")
+
