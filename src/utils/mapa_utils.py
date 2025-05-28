@@ -85,4 +85,40 @@ class GeneradorDeMapas:
             print("No se pudo extraer un JSON válido de la respuesta de la API.")
             return []
 
+    def generar_obstaculos_sin_colisiones(self, ancho, alto, entidades, num_obstaculos = 4, max_intentos = 100):
+        obstaculos = []
+        intentos = 0
+        while len(obstaculos) < num_obstaculos and intentos < max_intentos:
+            w = random.randint(30, 100)
+            h = random.randint(30, 100)
+            x = random.randint(0, ancho - w)
+            y = random.randint(0, alto - h)
+            nuevo_rect = pygame.Rect(x, y, w, h)
 
+            colision_con_entidades = False
+            for entidad in entidades:
+                entidad_rect = pygame.Rect(
+                    int(entidad.x - entidad.radio), int(entidad.y - entidad.radio),
+                    entidad.radio * 2, entidad.radio * 2
+                )
+                if nuevo_rect.colliderect(entidad_rect):
+                    colision_con_entidades = True
+                    break
+
+            if colision_con_entidades:
+                intentos += 1
+                continue
+
+            colision_con_obstaculos = False
+            for obs in obstaculos:
+                if nuevo_rect.colliderect(obs.rect):
+                    colision_con_obstaculos = True
+                    break
+
+            if colision_con_obstaculos:
+                intentos += 1
+                continue
+
+            obstaculos.append(ObstaculoFuturista(x, y, w, h))
+            intentos += 1
+        return obstaculos
