@@ -254,7 +254,7 @@ class Jugador(Agente):
         for proyectil in self.proyectiles[:]:
             proyectil.update(ancho_pantalla, alto_pantalla, obstaculos)
             if not proyectil.activo:
-                self.proyectiles.remove(proyectil) .
+                self.proyectiles.remove(proyectil)
 
     def dibujar_proyectiles(self, superficie):
         for proyectil in self.proyectiles:
