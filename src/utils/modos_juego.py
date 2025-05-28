@@ -5,9 +5,7 @@ from stable_baselines3 import DQN
 from stable_baselines3.common.env_util import make_vec_env
 from stable_baselines3.common.monitor import Monitor
 
-import sys
 
-sys.path.append("src")
 
 from src.envs.persecucion_env import PersecucionPygameEnv
 

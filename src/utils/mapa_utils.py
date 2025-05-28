@@ -3,10 +3,8 @@ import pygame
 import json
 import re
 import random
-import sys
 import threading
 
-sys.path.append("src")
 
 from src.model.entorno import ObstaculoFuturista
 

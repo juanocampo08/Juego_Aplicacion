@@ -1,6 +1,4 @@
-import sys
 
-sys.path.append("src")
 
 from src.utils.modos_juego import jugar_con_modelo_mejorado, entrenar_modelo_mejorado
 

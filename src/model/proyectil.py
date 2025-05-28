@@ -1,8 +1,6 @@
 import pygame
 import math
-import sys
 
-sys.path.append("src")
 
 from src.utils.visual_effects import VisualEffects
 

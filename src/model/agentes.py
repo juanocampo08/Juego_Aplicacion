@@ -1,9 +1,7 @@
 import pygame
 import math
 import random
-import sys
 
-sys.path.append("src")
 
 
 from src.model.proyectil import Proyectil

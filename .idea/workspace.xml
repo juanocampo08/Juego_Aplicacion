@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="ajuste">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="requerimientos">
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/mapa_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/mapa_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/modos_juego.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/modos_juego.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -387,11 +388,18 @@
       <option name="project" value="LOCAL" />
       <updated>1748467614170</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="requerimientos">
+      <option name="closed" value="true" />
+      <created>1748469628442</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1748469628442</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="el metodo actualiza efectos visuales relacionados con la inteligencia artificial del enemigo." />
     <MESSAGE value="se define la clase jugador que hereda de la clase Agente" />
     <MESSAGE value="se define el metodo que crea proyectiles, los añade a la lista de proyectiles." />
     <MESSAGE value="Dibuja los proyectiles en la superficie." />
@@ -416,6 +424,7 @@
     <MESSAGE value="ajustes de gitignore" />
     <MESSAGE value="se crea el metodo actualizar proyectiles" />
     <MESSAGE value="ajuste" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajuste" />
+    <MESSAGE value="requerimientos" />
+    <option name="LAST_COMMIT_MESSAGE" value="requerimientos" />
   </component>
 </project>

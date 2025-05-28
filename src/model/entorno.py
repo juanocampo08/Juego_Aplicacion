@@ -2,9 +2,7 @@ import pygame
 import math
 import time
 import random
-import sys
 
-sys.path.append("src")
 from src.utils.visual_effects import VisualEffects
 
 class ObstaculoFuturista:
