@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="se define el metodo que dibuja la barra encima del agente , mostrando solo la vida actual siendo esta es diferente de la vida maxima.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="Dibuja al enemigo con un diseño amenazante, similar a un diamante con un nucleo rotatorio">
       <change beforePath="$PROJECT_DIR$/src/model/agentes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/agentes.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -127,7 +126,47 @@
       <option name="project" value="LOCAL" />
       <updated>1748391061721</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="metodo que calcula color para el nucleo del agente">
+      <option name="closed" value="true" />
+      <created>1748391584111</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1748391584111</updated>
+    </task>
+    <task id="LOCAL-00009" summary="metodo que calcula color de brillo ligeramente mas claro.">
+      <option name="closed" value="true" />
+      <created>1748391683408</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1748391683408</updated>
+    </task>
+    <task id="LOCAL-00010" summary="metodo que dibuja el agente como un circulo">
+      <option name="closed" value="true" />
+      <created>1748391906054</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1748391906054</updated>
+    </task>
+    <task id="LOCAL-00011" summary="dibuja el jugador con un diseño futurista inlcuyendo su escudo y un nucleo hexagonal.">
+      <option name="closed" value="true" />
+      <created>1748392222115</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1748392222115</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Dibuja al enemigo con un diseño amenazante, similar a un diamante con un nucleo rotatorio">
+      <option name="closed" value="true" />
+      <created>1748392566510</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1748392566510</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -138,6 +177,11 @@
     <MESSAGE value="se define el metodo para actualizar los efectos" />
     <MESSAGE value="se define el meotodo dibujar, este dibuja al agente con la ayuda de pygame con sus efectos futuristas" />
     <MESSAGE value="se define el metodo que dibuja la barra encima del agente , mostrando solo la vida actual siendo esta es diferente de la vida maxima." />
-    <option name="LAST_COMMIT_MESSAGE" value="se define el metodo que dibuja la barra encima del agente , mostrando solo la vida actual siendo esta es diferente de la vida maxima." />
+    <MESSAGE value="metodo que calcula color para el nucleo del agente" />
+    <MESSAGE value="metodo que calcula color de brillo ligeramente mas claro." />
+    <MESSAGE value="metodo que dibuja el agente como un circulo" />
+    <MESSAGE value="dibuja el jugador con un diseño futurista inlcuyendo su escudo y un nucleo hexagonal." />
+    <MESSAGE value="Dibuja al enemigo con un diseño amenazante, similar a un diamante con un nucleo rotatorio" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dibuja al enemigo con un diseño amenazante, similar a un diamante con un nucleo rotatorio" />
   </component>
 </project>

@@ -185,6 +185,40 @@ class Agente:
                 center[1] + (self.radio - 2) * math.sin(angle)
             )
             pygame.draw.line(superficie, (255, 50, 50), line_start, line_end, 1)
+    def mover(self, dx, dy, obstaculos = None, otros_agentes = None):
+        factor_diag = 0.707 if dx != 0 and dy != 0 else 1.0
+        nueva_x = self.x + dx * self.velocidad * factor_diag
+        nueva_y = self.y + dy * self.velocidad * factor_diag
+
+        rect_futuro = pygame.Rect(
+            int(nueva_x - self.radio), int(nueva_y - self.radio),
+            self.radio * 2, self.radio * 2
+        )
+
+        colision = False
+
+        if obstaculos:
+            for obst in obstaculos:
+                if rect_futuro.colliderect(obst.rect):
+                    colision = True
+                    break
+
+        if not colision and otros_agentes:
+            for otro in otros_agentes:
+                if otro is self:
+                    continue
+                rect_otro = pygame.Rect(
+                    int(otro.x - otro.radio), int(otro.y - otro.radio),
+                    otro.radio * 2, otro.radio * 2
+                )
+                if rect_futuro.colliderect(rect_otro):
+                    colision = True
+                    break
+
+        if not colision:
+            self.x = max(self.radio, min(nueva_x, 800 - self.radio))
+            self.y = max(self.radio, min(nueva_y, 600 - self.radio))
+            self.update_effects()
 
 
 
