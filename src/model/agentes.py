@@ -221,4 +221,14 @@ class Agente:
             self.update_effects()
 
 
+class Enemigo(Agente):
+    def __init__(self, x, y):
+        super().__init__(x, y, (255, 50, 50), radio=12, velocidad=3, agent_type="enemy", vida_maxima=60)
+        self.scan_angle = 0
+        self.alert_level = 0
+
+        self.dano_contacto = 15
+
+
+
 
