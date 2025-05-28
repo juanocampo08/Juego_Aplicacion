@@ -110,3 +110,145 @@ class PersecucionPygameEnv(gym.Env):
             "efectividad_ia": self.efectividad_ia,
             "modo_ia": self.modo_ia
         }
+
+    def reset(self, seed=None):
+
+        super().reset(seed=seed)
+        intentos = 0
+        jugador_valido = False
+
+        while intentos < 200 and not jugador_valido:
+            jugador_x = random.randint(50, self.ancho_pantalla - 50)
+            jugador_y = random.randint(50, self.alto_pantalla - 50)
+            jugador_rect = pygame.Rect(int(jugador_x - 10), int(jugador_y - 10), 20, 20)
+
+            enemigos_candidatos = []
+            valido = True
+
+            for _ in range(self.num_enemigos):
+                ex = random.randint(50, self.ancho_pantalla - 50)
+                ey = random.randint(50, self.alto_pantalla - 50)
+                enemigo_rect_temp = pygame.Rect(int(ex - 12), int(ey - 12), 24, 24)
+
+
+                if enemigo_rect_temp.colliderect(jugador_rect):
+                    valido = False
+                    break
+
+                for (ox, oy) in enemigos_candidatos:
+                    if math.hypot(ex - ox, ey - oy) < 80:
+                        valido = False
+                        break
+                if not valido:
+                    break
+
+                enemigos_candidatos.append((ex, ey))
+
+            if valido:
+                for (ex, ey) in enemigos_candidatos:
+                    d = math.hypot(ex - jugador_x, ey - jugador_y)
+                    if d <= 150:
+                        valido = False
+                        break
+
+            if valido:
+                self.jugador = Jugador(jugador_x, jugador_y)
+                self.enemigos = [Enemigo(ex, ey) for (ex, ey) in enemigos_candidatos]
+                jugador_valido = True
+
+            intentos += 1
+
+        if not jugador_valido:
+            raise RuntimeError("No se encontraron posiciones válidas para jugador y enemigos tras 200 intentos")
+
+        self.obstaculos = []
+        obstaculo_central = ObstaculoFuturista(
+            self.ancho_pantalla // 2 - 40, self.alto_pantalla // 2 - 60, 80, 120
+        )
+
+        choque_central = False
+        if obstaculo_central.rect.colliderect(pygame.Rect(int(self.jugador.x - 10), int(self.jugador.y - 10), 20, 20)):
+            choque_central = True
+
+        for enemigo in self.enemigos:
+            enemigo_rect = pygame.Rect(int(enemigo.x - 12), int(enemigo.y - 12), 24, 24)
+            if obstaculo_central.rect.colliderect(enemigo_rect):
+                choque_central = True
+                break
+
+        if not choque_central:
+            self.obstaculos.append(obstaculo_central)
+        intentos_obs = 0
+        num_obs = random.randint(2, 4)
+        target_obs = num_obs + (1 if not choque_central else 0)
+
+        while len(self.obstaculos) < target_obs and intentos_obs < 100:
+            obs_x = random.randint(50, self.ancho_pantalla - 100)
+            obs_y = random.randint(50, self.alto_pantalla - 80)
+            obs_w = random.randint(30, 60)
+            obs_h = random.randint(30, 60)
+            nuevo_obs = ObstaculoFuturista(obs_x, obs_y, obs_w, obs_h)
+
+            solapamiento = False
+
+            for obs_exist in self.obstaculos:
+                if nuevo_obs.rect.colliderect(obs_exist.rect):
+                    solapamiento = True
+                    break
+
+            zona_segura_j = pygame.Rect(0, 0, 60, 60)
+            zona_segura_j.center = (self.ancho_pantalla // 4, self.alto_pantalla // 2)
+            zona_segura_e = pygame.Rect(0, 0, 60, 60)
+            zona_segura_e.center = (3 * self.ancho_pantalla // 4, self.alto_pantalla // 2)
+
+            if (nuevo_obs.rect.colliderect(zona_segura_j) or
+                    nuevo_obs.rect.colliderect(zona_segura_e)):
+                solapamiento = True
+
+            jugador_rect = pygame.Rect(int(self.jugador.x - 10), int(self.jugador.y - 10), 20, 20)
+            if nuevo_obs.rect.colliderect(jugador_rect):
+                solapamiento = True
+
+            if not solapamiento:
+                for enemigo in self.enemigos:
+                    enemigo_rect = pygame.Rect(int(enemigo.x - 12), int(enemigo.y - 12), 24, 24)
+                    if nuevo_obs.rect.colliderect(enemigo_rect):
+                        solapamiento = True
+                        break
+
+            if not solapamiento:
+                dist_jugador = math.hypot(
+                    (nuevo_obs.rect.centerx - self.jugador.x),
+                    (nuevo_obs.rect.centery - self.jugador.y)
+                )
+                if dist_jugador < 30:
+                    solapamiento = True
+
+                for enemigo in self.enemigos:
+                    dist_enemigo = math.hypot(
+                        (nuevo_obs.rect.centerx - enemigo.x),
+                        (nuevo_obs.rect.centery - enemigo.y)
+                    )
+                    if dist_enemigo < 30:
+                        solapamiento = True
+                        break
+
+            if not solapamiento:
+                self.obstaculos.append(nuevo_obs)
+
+            intentos_obs += 1
+
+        self.distancia_anterior = None
+        self.pasos = 0
+        self.juego_terminado = False
+        self.victoria = False
+        self.puntos = 0
+        self.algoritmo_ia.historial_jugador.clear()
+        for _ in range(3):
+            self.algoritmo_ia.historial_jugador.append((self.jugador.x, self.jugador.y))
+
+        observation = self._get_obs()
+        info = self._get_info()
+        if self.render_mode == "human":
+            self._render_frame()
+        return observation, info
