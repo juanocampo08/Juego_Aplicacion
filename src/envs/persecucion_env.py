@@ -638,3 +638,11 @@ class PersecucionPygameEnv(gym.Env):
         self.pantalla.blit(minimap_surface, minimap_rect.topleft)
         minimap_label = pygame.font.Font(None, 20).render("RADAR", True, (0, 255, 0))
         self.pantalla.blit(minimap_label, (self.ancho_pantalla - 65, minimap_rect.bottom + 5))
+
+    def cambiar_modo_ia(self, nuevo_modo):
+        modos_validos = ["hibrido", "predictivo", "campo_potencial", "genetico"]
+        if nuevo_modo in modos_validos:
+            self.modo_ia = nuevo_modo
+            print(f"Modo IA cambiado a: {nuevo_modo}")
+        else:
+            print(f"Modo no válido. Opciones: {modos_validos}")

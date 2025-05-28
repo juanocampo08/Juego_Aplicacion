@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="Solucion de conflictos">
-      <change beforePath="$PROJECT_DIR$/src/ia/smart_chase_algorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ia/smart_chase_algorithm.py" afterDir="false" />
-    </list>
+    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="Solucion de conflictos" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
