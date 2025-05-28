@@ -119,6 +119,10 @@ class Agente:
         r, g, b = self.color[:3]
         return (min(255, r + 100), min(255, g + 100), min(255, b + 100))
 
+    def _calculate_glow_color(self):
+        r, g, b = self.color[:3]
+        return (min(255, r + 50), min(255, g + 50), min(255, b + 50))
+
 
 
 
