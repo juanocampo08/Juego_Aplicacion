@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="Función de renderizado para mostrar el estado actual del juego. Incluye un fondo futurista, obstáculos dinámicos, agentes y un HUD(Heads-Up Display).">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/envs/persecucion_env.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/envs/persecucion_env.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Juego_Aplicacion.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Juego_Aplicacion.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +21,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -428,7 +428,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748407158731</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Función de renderizado para mostrar el estado actual del juego. Incluye un fondo futurista, obstáculos dinámicos, agentes y un HUD(Heads-Up Display).">
+      <option name="closed" value="true" />
+      <created>1748455333173</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1748455333173</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -477,6 +485,11 @@
           <url>file://$PROJECT_DIR$/src/envs/persecucion_env.py</url>
           <line>407</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/envs/persecucion_env.py</url>
+          <line>459</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
