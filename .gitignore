@@ -1,3 +1,5 @@
 .venv
-.idea
-q
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
