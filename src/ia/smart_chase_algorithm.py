@@ -240,6 +240,21 @@ class AlgoritmoPersecucionInteligente:
                                  min(tamaño_torneo, len(self.poblacion_rutas)))
         return max(candidatos, key=lambda x: x['fitness'])
 
+    def _cruce(self, padre1, padre2):
+      
+      if not padre1['path'] or not padre2['path']:
+            return {'path': [], 'fitness': 0}
+        
+        punto_cruce = random.randint(1, min(len(padre1['path']), len(padre2['path'])) - 1)
+        
+        nueva_ruta = padre1['path'][:punto_cruce] + padre2['path'][punto_cruce:]
+        
+        return {'path': nueva_ruta, 'fitness': 0}
+
+    
+
+    
+
     
       
 
