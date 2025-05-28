@@ -49,3 +49,20 @@ class VisualEffects:
             (x, y + h - corner_size), (x, y + corner_size)
         ]
         pygame.draw.polygon(surface, color, points, thickness)
+
+    @staticmethod
+    def draw_particle_trail(surface, start_pos, end_pos, color, particles=8):
+
+        for i in range(particles):
+            t = i / particles
+            x = start_pos[0] + (end_pos[0] - start_pos[0]) * t
+            y = start_pos[1] + (end_pos[1] - start_pos[1]) * t
+
+            alpha = int(255 * (1 - t) * 0.7)  # Factor 0.7 para que no sea completamente opaco.
+
+            particle_surface = pygame.Surface((4, 4), pygame.SRCALPHA)  # Pequeña superficie de 4x4 píxeles.
+            particle_color = (*color[:3], alpha)  # Combina el color RGB con el alfa calculado.
+
+            pygame.draw.circle(particle_surface, particle_color, (2, 2), 2)
+
+            surface.blit(particle_surface, (int(x - 2), int(y - 2)))
