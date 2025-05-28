@@ -265,6 +265,26 @@ class AlgoritmoPersecucionInteligente:
                     0 <= nueva_pos[1] < self.cols):
                     individuo['path'][idx] = nueva_pos
 
+    def _crear_grid_mejorado(self, obstaculos, margen_inflacion=15):
+      grid = [[0 for _ in range(self.cols)] for _ in range(self.rows)]
+        
+        for obstaculo in obstaculos:
+            rect_inflado = pygame.Rect(
+                obstaculo.x - margen_inflacion,
+                obstaculo.y - margen_inflacion,
+                obstaculo.ancho + 2 * margen_inflacion,
+                obstaculo.alto + 2 * margen_inflacion
+            )
+            
+            for i in range(self.rows):
+                for j in range(self.cols):
+                    x, y = self._grid_a_pos(i, j)
+                    if rect_inflado.collidepoint(x, y):
+                        grid[i][j] = 1
+        
+        return grid
+    
+
     
 
     
