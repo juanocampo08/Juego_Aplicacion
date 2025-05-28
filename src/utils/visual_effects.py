@@ -58,10 +58,10 @@ class VisualEffects:
             x = start_pos[0] + (end_pos[0] - start_pos[0]) * t
             y = start_pos[1] + (end_pos[1] - start_pos[1]) * t
 
-            alpha = int(255 * (1 - t) * 0.7)  # Factor 0.7 para que no sea completamente opaco.
+            alpha = int(255 * (1 - t) * 0.7)
 
-            particle_surface = pygame.Surface((4, 4), pygame.SRCALPHA)  # Pequeña superficie de 4x4 píxeles.
-            particle_color = (*color[:3], alpha)  # Combina el color RGB con el alfa calculado.
+            particle_surface = pygame.Surface((4, 4), pygame.SRCALPHA)
+            particle_color = (*color[:3], alpha)
 
             pygame.draw.circle(particle_surface, particle_color, (2, 2), 2)
 
