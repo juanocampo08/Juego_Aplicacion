@@ -86,6 +86,22 @@ class AlgoritmoPersecucionInteligente:
 
         return predicciones[2] if len(predicciones) > 2 else predicciones[0]
 
+    def _a_star_predictivo(self, enemigo, jugador, obstaculos):
+      pos_predicha = self._predecir_posicion_jugador()
+      
+      grid = self._crear_grid_mejorado(obstaculos)
+        
+      start = self._pos_a_grid(enemigo.x, enemigo.y)
+      
+      goal_pred = self._pos_a_grid(pos_predicha[0], pos_predicha[1])
+      goal_actual = self._pos_a_grid(jugador.x, jugador.y)
+      
+      path = self._a_star_con_heuristica_mejorada(grid, start, goal_pred)
+      
+      if not path or len(path) < 2:
+            path = self._a_star_con_heuristica_mejorada(grid, start, goal_actual)
+      return self._path_a_accion(path, start)
+
         
       
 
