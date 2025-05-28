@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="este metodo dibuja el power up en la superficie de pygame, incluyendo un circulo principal y un efecto de brillo.">
-      <change beforePath="$PROJECT_DIR$/src/model/proyectil.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/proyectil.py" afterDir="false" />
-    </list>
+    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="verifica si el proyectil ha colisionado con un agente dado." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -310,14 +308,42 @@
       <option name="project" value="LOCAL" />
       <updated>1748398577527</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Inicializa un nuevo proyectil">
+      <option name="closed" value="true" />
+      <created>1748399303341</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1748399303341</updated>
+    </task>
+    <task id="LOCAL-00032" summary="actualiza la posicion del proyectil, sus efectos y verifica colisiones.">
+      <option name="closed" value="true" />
+      <created>1748399400704</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1748399400704</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Dibuja el proyectil en la superficie de pygame.">
+      <option name="closed" value="true" />
+      <created>1748399786520</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1748399786520</updated>
+    </task>
+    <task id="LOCAL-00034" summary="verifica si el proyectil ha colisionado con un agente dado.">
+      <option name="closed" value="true" />
+      <created>1748399905537</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1748399905537</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="se define el meotodo dibujar, este dibuja al agente con la ayuda de pygame con sus efectos futuristas" />
-    <MESSAGE value="se define el metodo que dibuja la barra encima del agente , mostrando solo la vida actual siendo esta es diferente de la vida maxima." />
-    <MESSAGE value="metodo que calcula color para el nucleo del agente" />
-    <MESSAGE value="metodo que calcula color de brillo ligeramente mas claro." />
     <MESSAGE value="metodo que dibuja el agente como un circulo" />
     <MESSAGE value="dibuja el jugador con un diseño futurista inlcuyendo su escudo y un nucleo hexagonal." />
     <MESSAGE value="Dibuja al enemigo con un diseño amenazante, similar a un diamante con un nucleo rotatorio" />
@@ -339,6 +365,10 @@
     <MESSAGE value="este metodo representa un area de colision." />
     <MESSAGE value="este metodo actualiza el estado power up, verificando su duracion." />
     <MESSAGE value="este metodo dibuja el power up en la superficie de pygame, incluyendo un circulo principal y un efecto de brillo." />
-    <option name="LAST_COMMIT_MESSAGE" value="este metodo dibuja el power up en la superficie de pygame, incluyendo un circulo principal y un efecto de brillo." />
+    <MESSAGE value="Inicializa un nuevo proyectil" />
+    <MESSAGE value="actualiza la posicion del proyectil, sus efectos y verifica colisiones." />
+    <MESSAGE value="Dibuja el proyectil en la superficie de pygame." />
+    <MESSAGE value="verifica si el proyectil ha colisionado con un agente dado." />
+    <option name="LAST_COMMIT_MESSAGE" value="verifica si el proyectil ha colisionado con un agente dado." />
   </component>
 </project>
