@@ -24,3 +24,6 @@ class ObstaculoFuturista:
     def update(self):
         self.energy_pulse += 0.05
 
+    def dibujar(self, superficie):
+        shadow_rect = pygame.Rect(self.rect.x + 4, self.rect.y + 4, self.rect.width, self.rect.height)
+        pygame.draw.rect(superficie, (20, 20, 30), shadow_rect)
