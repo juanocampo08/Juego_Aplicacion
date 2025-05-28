@@ -250,4 +250,8 @@ class Jugador(Agente):
             self.proyectiles.append(proyectil)
             self.tiempo_ultimo_disparo = tiempo_actual
 
+    def dibujar_proyectiles(self, superficie):
+        for proyectil in self.proyectiles:
+            proyectil.dibujar(superficie)
+
 
