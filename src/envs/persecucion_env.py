@@ -7,6 +7,7 @@ import gymnasium as gym
 from gymnasium import spaces
 
 import sys
+
 sys.path.append("src")
 
 from src.utils.mapa_utils import GeneradorDeMapas
@@ -16,9 +17,8 @@ from src.model.entorno import ObstaculoFuturista, PowerUpSalud
 from src.utils.visual_effects import VisualEffects
 from src.utils.pantallas import pantalla_bienvenida, pantalla_game_over
 
-
-
 generador_mapa = GeneradorDeMapas()
+
 
 class PersecucionPygameEnv(gym.Env):
 
@@ -55,13 +55,12 @@ class PersecucionPygameEnv(gym.Env):
         self.tiempo_ultimo_powerup = time.time()
         self.INTERVALO_POWERUP = 11
 
-
         self.action_space = spaces.Discrete(9)
-
 
         self.pantalla = None
         self.clock = None
         self.font = None
+
         self.jugador = None
         self.enemigos = []
         self.obstaculos = []
@@ -71,13 +70,14 @@ class PersecucionPygameEnv(gym.Env):
         self.score = 0
         self.capturas = 0
 
-
         self.algoritmo_ia = AlgoritmoPersecucionInteligente(ancho_pantalla, alto_pantalla)
         self.usar_ia_inteligente = True
+
         self.tiempo_captura_promedio = []
         self.efectividad_ia = 0.0
 
     def _get_obs(self):
+
         player_x_norm = self.jugador.x / self.ancho_pantalla
         player_y_norm = self.jugador.y / self.alto_pantalla
 
@@ -86,12 +86,16 @@ class PersecucionPygameEnv(gym.Env):
         for enemigo in self.enemigos:
             ex_norm = enemigo.x / self.ancho_pantalla
             ey_norm = enemigo.y / self.alto_pantalla
+
             dx = self.jugador.x - enemigo.x
             dy = self.jugador.y - enemigo.y
             dist = max(math.hypot(dx, dy), 1.0)
+
             dir_x = dx / dist
             dir_y = dy / dist
+
             dist_norm = min(dist / 300.0, 1.0)
+
             obs_list.extend([ex_norm, ey_norm, dir_x, dir_y, dist_norm])
 
         prog = self.pasos / self.max_pasos
@@ -100,6 +104,7 @@ class PersecucionPygameEnv(gym.Env):
         return np.array(obs_list, dtype=np.float32)
 
     def _get_info(self):
+
         distancias = [
             math.hypot(e.x - self.jugador.x, e.y - self.jugador.y)
             for e in self.enemigos
@@ -130,7 +135,6 @@ class PersecucionPygameEnv(gym.Env):
                 ex = random.randint(50, self.ancho_pantalla - 50)
                 ey = random.randint(50, self.alto_pantalla - 50)
                 enemigo_rect_temp = pygame.Rect(int(ex - 12), int(ey - 12), 24, 24)
-
 
                 if enemigo_rect_temp.colliderect(jugador_rect):
                     valido = False
@@ -163,6 +167,7 @@ class PersecucionPygameEnv(gym.Env):
             raise RuntimeError("No se encontraron posiciones válidas para jugador y enemigos tras 200 intentos")
 
         self.obstaculos = []
+
         obstaculo_central = ObstaculoFuturista(
             self.ancho_pantalla // 2 - 40, self.alto_pantalla // 2 - 60, 80, 120
         )
@@ -179,6 +184,7 @@ class PersecucionPygameEnv(gym.Env):
 
         if not choque_central:
             self.obstaculos.append(obstaculo_central)
+
         intentos_obs = 0
         num_obs = random.randint(2, 4)
         target_obs = num_obs + (1 if not choque_central else 0)
@@ -244,6 +250,7 @@ class PersecucionPygameEnv(gym.Env):
         self.juego_terminado = False
         self.victoria = False
         self.puntos = 0
+
         self.algoritmo_ia.historial_jugador.clear()
         for _ in range(3):
             self.algoritmo_ia.historial_jugador.append((self.jugador.x, self.jugador.y))
@@ -255,6 +262,7 @@ class PersecucionPygameEnv(gym.Env):
         return observation, info
 
     def step(self, action):
+
         if self.juego_terminado:
             return self._get_obs(), 0, True, False, self._get_info()
 
@@ -296,6 +304,7 @@ class PersecucionPygameEnv(gym.Env):
                 acciones_enemigos.append(accion_ia)
         else:
             acciones_enemigos = [action] * len(enemigos_vivos)
+
         movimientos_enemigo = [
             (0, -1), (1, -1), (1, 0), (1, 1),
             (0, 1), (-1, 1), (-1, 0), (-1, -1), (0, 0)
@@ -307,7 +316,6 @@ class PersecucionPygameEnv(gym.Env):
                 dx, dy = movimientos_enemigo[act]
                 enemigo.mover(dx, dy, self.obstaculos, enemigos_vivos)
 
-
         if self.modo_entrenamiento:
             terminado = False
             recompensa = 0
@@ -318,8 +326,9 @@ class PersecucionPygameEnv(gym.Env):
                     terminado = True
                     self.capturas += 1
                     self.tiempo_captura_promedio.append(self.pasos)
-                    recompensa += 300  # Gran recompensa por captura
+                    recompensa += 300
                     break
+
 
             if not terminado:
                 min_dist = min(math.hypot(e.x - self.jugador.x, e.y - self.jugador.y)
@@ -352,10 +361,12 @@ class PersecucionPygameEnv(gym.Env):
                         if self.puntos >= 50:
                             self.puntos -= 10
 
+
             if not enemigos_vivos and not self.juego_terminado:
                 self.juego_terminado = True
                 self.victoria = True
                 self.puntos += 500
+
             terminado = self.juego_terminado
             recompensa = 0
             truncado = False
@@ -392,39 +403,42 @@ class PersecucionPygameEnv(gym.Env):
                 self.jugador.vida_actual = min(self.jugador.vida_maxima, self.jugador.vida_actual + 15)
                 self.powerups_salud.remove(powerup)
 
-            if time.time() - self.tiempo_ultimo_mapa[0] > self.INTERVALO_MAPA and not hasattr(self,"actualizando_mapa") and not self.modo_entrenamiento:
-                self.actualizando_mapa = True
+        if time.time() - self.tiempo_ultimo_mapa[0] > self.INTERVALO_MAPA and not hasattr(self,
+                                                                                          "actualizando_mapa") and not self.modo_entrenamiento:
+            self.actualizando_mapa = True
 
-                def set_mapa(nuevo_mapa):
-                    if nuevo_mapa:
-                        self.obstaculos = generador_mapa.filtrar_obstaculos_sin_colision(nuevo_mapa, [self.jugador] + self.enemigos)
-                    if hasattr(self, "actualizando_mapa"):
-                        delattr(self, "actualizando_mapa")
-                    self.tiempo_ultimo_mapa[0] = time.time()
+            def set_mapa(nuevo_mapa):
+                if nuevo_mapa:
+                    self.obstaculos = generador_mapa.filtrar_obstaculos_sin_colision(nuevo_mapa,
+                                                                                     [self.jugador] + self.enemigos)
+                if hasattr(self, "actualizando_mapa"):
+                    delattr(self, "actualizando_mapa")
+                self.tiempo_ultimo_mapa[0] = time.time()
 
-                generador_mapa.actualizar_mapa_async(self.ancho_pantalla, self.alto_pantalla, set_mapa)
-            return observation, recompensa, terminado, truncado, info
+            generador_mapa.actualizar_mapa_async(self.ancho_pantalla, self.alto_pantalla, set_mapa)
+
+        return observation, recompensa, terminado, truncado, info
 
     def _calcular_recompensa_mejorada(self, accion):
+
         distancia_actual = min(
             math.hypot(e.x - self.jugador.x, e.y - self.jugador.y) for e in self.enemigos if e.esta_vivo)
         recompensa = 0
 
+
         if distancia_actual < (
-                self.enemigos[0].radio + self.jugador.radio):  # Asume que todos los enemigos tienen el mismo radio
+                self.enemigos[0].radio + self.jugador.radio):
             recompensa += 300
 
         if hasattr(self, 'distancia_anterior') and self.distancia_anterior is not None:
-            diferencia_distancia = self.distancia_anterior - distancia_actual  # Recompensa por la reducción de distancia
-            # Un factor de distancia que aumenta la recompensa cuando la distancia es menor,
-            # lo que fomenta que el enemigo se acerque aún más una vez cerca.
+            diferencia_distancia = self.distancia_anterior - distancia_actual
             factor_distancia = 1.0 + (200 - min(distancia_actual, 200)) / 200
             recompensa += diferencia_distancia * factor_distancia * 3.0
 
         recompensa -= 0.01
 
         rect_enemigo = pygame.Rect(
-            int(self.enemigos[0].x - self.enemigos[0].radio),  # Asume que solo se considera el primer enemigo
+            int(self.enemigos[0].x - self.enemigos[0].radio),
             int(self.enemigos[0].y - self.enemigos[0].radio),
             self.enemigos[0].radio * 2, self.enemigos[0].radio * 2
         )
@@ -452,6 +466,7 @@ class PersecucionPygameEnv(gym.Env):
         return recompensa
 
     def _render_frame(self):
+
         if self.pantalla is None:
             pygame.init()
             pygame.display.init()
@@ -523,17 +538,19 @@ class PersecucionPygameEnv(gym.Env):
             closest_enemy = next((e for e in enemigos_ordenados if e.esta_vivo), None)
 
             if closest_enemy:
-                vision_surface = pygame.Surface((160, 160), pygame.SRCALPHA)  # Superficie semitransparente
-                pygame.draw.circle(vision_surface, (255, 0, 0, 20), (80, 80), 80)  # Círculo interior
-                pygame.draw.circle(vision_surface, (255, 100, 100, 40), (80, 80), 80, 2)  # Borde del círculo
+                vision_surface = pygame.Surface((160, 160), pygame.SRCALPHA)
+                pygame.draw.circle(vision_surface, (255, 0, 0, 20), (80, 80), 80)
+                pygame.draw.circle(vision_surface, (255, 100, 100, 40), (80, 80), 80, 2)
                 self.pantalla.blit(vision_surface,
-                                   (closest_enemy.x - 80, closest_enemy.y - 80))  # Dibujar en la posición del enemigo
+                                   (closest_enemy.x - 80, closest_enemy.y - 80))
 
         if not self.modo_entrenamiento:
             self._draw_futuristic_hud()
 
+
         if not self.modo_entrenamiento:
             self.jugador.dibujar_proyectiles(self.pantalla)
+
 
         for powerup in self.powerups_salud:
             powerup.dibujar(self.pantalla)
@@ -546,6 +563,7 @@ class PersecucionPygameEnv(gym.Env):
         self.clock.tick(self.velocidad_juego if not self.modo_entrenamiento else 0)
 
     def _draw_futuristic_hud(self):
+
         vida_porcentaje = self.jugador.vida_actual / self.jugador.vida_maxima if self.jugador.esta_vivo else 0
         vida_bar_width = 180
         vida_bar_height = 11
@@ -581,7 +599,6 @@ class PersecucionPygameEnv(gym.Env):
             pygame.draw.rect(self.pantalla, (40, 40, 40), energy_rect)
             fill_width = int(bar_width * max(0, min(self.jugador.boost_energy, 100)) / 100)
             energy_fill = pygame.Rect(x_pos, y_pos, fill_width, bar_height)
-            # Cambia el color de la barra de energía según el nivel de energía.
             energy_color = (0, 255, 255) if self.jugador.boost_energy > 50 else (255, 255, 0)
             pygame.draw.rect(self.pantalla, energy_color, energy_fill)
             pygame.draw.rect(self.pantalla, (100, 100, 100), energy_rect, 2)
@@ -589,8 +606,10 @@ class PersecucionPygameEnv(gym.Env):
         minimap_size = 140
         minimap_rect = pygame.Rect(self.ancho_pantalla - minimap_size - 15, 15, minimap_size, minimap_size)
         minimap_surface = pygame.Surface((minimap_size, minimap_size), pygame.SRCALPHA)
+
         player_x = max(0, min(self.jugador.x, self.ancho_pantalla))
         player_y = max(0, min(self.jugador.y, self.alto_pantalla))
+
         scale_x = minimap_size / self.ancho_pantalla
         scale_y = minimap_size / self.alto_pantalla
 
@@ -608,7 +627,6 @@ class PersecucionPygameEnv(gym.Env):
 
         if hasattr(self, 'obstaculos'):
             for obstaculo in self.obstaculos:
-                # Asegura que las coordenadas del obstáculo estén dentro del rango del mapa.
                 ox = max(0, min(obstaculo.x, self.ancho_pantalla))
                 oy = max(0, min(obstaculo.y, self.alto_pantalla))
                 ow = max(1, int(obstaculo.ancho * scale_x))
@@ -636,6 +654,7 @@ class PersecucionPygameEnv(gym.Env):
             pygame.draw.circle(minimap_surface, (0, 255, 100), (px, py), 3)
 
         self.pantalla.blit(minimap_surface, minimap_rect.topleft)
+
         minimap_label = pygame.font.Font(None, 20).render("RADAR", True, (0, 255, 0))
         self.pantalla.blit(minimap_label, (self.ancho_pantalla - 65, minimap_rect.bottom + 5))
 
@@ -648,6 +667,7 @@ class PersecucionPygameEnv(gym.Env):
             print(f"Modo no válido. Opciones: {modos_validos}")
 
     def render(self):
+
         return self._render_frame()
 
     def close(self):

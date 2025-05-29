@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="requerimientos">
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/mapa_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/mapa_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/modos_juego.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/modos_juego.py" afterDir="false" />
-    </list>
+    <list default="true" id="ac796123-4041-45fa-abd1-f276a1f8b204" name="Changes" comment="ajustes de requerimientos" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -396,11 +392,18 @@
       <option name="project" value="LOCAL" />
       <updated>1748469628442</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="ajustes de requerimientos">
+      <option name="closed" value="true" />
+      <created>1748470346847</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1748470346847</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="se define la clase jugador que hereda de la clase Agente" />
     <MESSAGE value="se define el metodo que crea proyectiles, los añade a la lista de proyectiles." />
     <MESSAGE value="Dibuja los proyectiles en la superficie." />
     <MESSAGE value="permite la interaccion del usuario con el teclado para hacer el juego efectivo." />
@@ -425,6 +428,7 @@
     <MESSAGE value="se crea el metodo actualizar proyectiles" />
     <MESSAGE value="ajuste" />
     <MESSAGE value="requerimientos" />
-    <option name="LAST_COMMIT_MESSAGE" value="requerimientos" />
+    <MESSAGE value="ajustes de requerimientos" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajustes de requerimientos" />
   </component>
 </project>
