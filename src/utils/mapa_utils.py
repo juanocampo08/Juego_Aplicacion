@@ -1,17 +1,22 @@
-import  requests
+import requests
 import pygame
 import json
 import re
 import random
+import sys
 import threading
 
+sys.path.append("src")
 
 from src.model.entorno import ObstaculoFuturista
 
-API_KEY = "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"
+API_KEY = "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"
+
 
 class GeneradorDeMapas:
+
     def __init__(self, api_key=API_KEY, modelo_api="deepseek/deepseek-prover-v2:free"):
+
         self.api_key = api_key
         self.modelo_api = modelo_api
 
@@ -83,7 +88,8 @@ class GeneradorDeMapas:
             print("No se pudo extraer un JSON válido de la respuesta de la API.")
             return []
 
-    def generar_obstaculos_sin_colisiones(self, ancho, alto, entidades, num_obstaculos = 4, max_intentos = 100):
+    def generar_obstaculos_sin_colision(self, ancho, alto, entidades, num_obstaculos=4, max_intentos=100):
+
         obstaculos = []
         intentos = 0
         while len(obstaculos) < num_obstaculos and intentos < max_intentos:
@@ -120,7 +126,9 @@ class GeneradorDeMapas:
             obstaculos.append(ObstaculoFuturista(x, y, w, h))
             intentos += 1
         return obstaculos
-    def filtrar_obstaculos_sin_colisiones(self, mapa_json, entidades):
+
+    def filtrar_obstaculos_sin_colision(self, mapa_json, entidades):
+
         obstaculos_filtrados = []
         for o in mapa_json:
             rect = pygame.Rect(o["x"], o["y"], o["ancho"], o["alto"])
